@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:papproject/Screens/registerScreen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:papproject/Screens/resPasswordScreen.dart';
+import 'package:papproject/widgets/toast.dart';
 
 import 'homeScreen.dart';
 
@@ -11,7 +14,52 @@ class loginScreen extends StatefulWidget {
 }
 
 class _loginScreenState extends State<loginScreen> {
-  bool _isSigning = false;
+
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+
+  String _error = '';
+  bool _isSigningUp = false;
+
+
+  void _login() async{
+    setState(() {
+      _isSigningUp = true;
+    });
+
+    if (_emailController.text.isEmpty || _passwordController.text.isEmpty) {
+      setState(() {
+        _isSigningUp = false;
+      });
+      Future.delayed(Duration(milliseconds: 100), () {
+        showToast(message: 'Todos os campos devem ser preenchidos.');
+      });
+      return;
+    }
+
+    try{
+      UserCredential userCredential = await _auth.signInWithEmailAndPassword(email: _emailController.text, password: _passwordController.text);
+          showToast(message: 'Seja bem-vindo ${userCredential.user?.email}');
+          Navigator.push(context, MaterialPageRoute(builder: (context) => homeScreen()));
+    }catch(e){
+      setState(() {
+        _error = e.toString();
+      });
+    }finally{
+      setState(() {
+        _isSigningUp = false;
+      });
+    }
+  }
+
+  void _navigatorToRegister(){
+    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => registerScreen()));
+  }
+  void _navigatorTradePassword(){
+    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => resPasswordScreen()));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -52,10 +100,11 @@ class _loginScreenState extends State<loginScreen> {
                   ),
                   const SizedBox(height: 20),
                   TextField(
+                    controller: _emailController,
                     decoration: InputDecoration(
                       filled: true,
-                      fillColor: Colors.white,
-                      hintText: 'Usuário',
+                      fillColor: _emailController.text.isEmpty ? Colors.white : Colors.green,
+                      hintText: 'Email',
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),
@@ -63,10 +112,11 @@ class _loginScreenState extends State<loginScreen> {
                   ),
                   const SizedBox(height: 10),
                   TextField(
+                    controller: _passwordController,
                     obscureText: true,
                     decoration: InputDecoration(
                       filled: true,
-                      fillColor: Colors.white,
+                      fillColor: _passwordController.text.isEmpty ? Colors.white : Colors.green,
                       hintText: 'Senha',
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
@@ -77,7 +127,9 @@ class _loginScreenState extends State<loginScreen> {
                   Align(
                     alignment: Alignment.centerRight,
                     child: TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        _navigatorTradePassword();
+                      },
                       child: Text(
                         'Esqueceu senha.',
                         style: TextStyle(
@@ -97,10 +149,7 @@ class _loginScreenState extends State<loginScreen> {
                   SizedBox(height: 10),
                   ElevatedButton(
                     onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const homeScreen()));
+                      _login();
                     },
                     style: ElevatedButton.styleFrom(
                       foregroundColor: Colors.blue,
@@ -111,7 +160,7 @@ class _loginScreenState extends State<loginScreen> {
                         borderRadius: BorderRadius.circular(10),
                       ),
                     ),
-                    child: _isSigning
+                    child: _isSigningUp
                         ? CircularProgressIndicator(
                             color: Colors.blue,
                           )
@@ -134,10 +183,7 @@ class _loginScreenState extends State<loginScreen> {
                   SizedBox(height: 10),
                   TextButton(
                     onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const registerScreen()));
+                      _navigatorToRegister();
                     },
                     child: Text(
                       'Ainda não tem conta: Criar agora.',

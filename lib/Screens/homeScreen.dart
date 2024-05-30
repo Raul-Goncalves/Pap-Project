@@ -1,4 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:papproject/Screens/profileScreen.dart';
 
 import 'loginScreen.dart';
 
@@ -10,11 +13,20 @@ class homeScreen extends StatefulWidget {
 }
 
 class _homeScreenState extends State<homeScreen> {
-  void _onClickWithButton() {
-    Navigator.push(
-        context, MaterialPageRoute(builder: (context) => const loginScreen()));
-  }
 
+  void _onClickWithButton() {
+    final FirebaseAuth _auth = FirebaseAuth.instance;
+
+    User? user = _auth.currentUser;
+
+    if(user == null){
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => const loginScreen()));
+    }else{
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (context) => const profileScreen()));
+    }
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,7 +47,7 @@ class _homeScreenState extends State<homeScreen> {
                 suffixIcon: GestureDetector(
                   onTap: _onClickWithButton,
                   child: const CircleAvatar(
-                    backgroundImage: AssetImage("assets/logo.png"),
+                    backgroundImage: AssetImage("assets/back_ground.png"),
                     radius: 10,
                   ),
                 ),
