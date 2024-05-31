@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:papproject/Screens/profileScreen.dart';
 
 import 'loginScreen.dart';
@@ -14,9 +15,10 @@ class homeScreen extends StatefulWidget {
 
 class _homeScreenState extends State<homeScreen> {
 
+  final LatLng _center = const LatLng(40.2826, -7.50326);
+
   void _onClickWithButton() {
     final FirebaseAuth _auth = FirebaseAuth.instance;
-
     User? user = _auth.currentUser;
 
     if(user == null){
@@ -54,6 +56,16 @@ class _homeScreenState extends State<homeScreen> {
                 contentPadding: EdgeInsets.symmetric(vertical: 10.0)),
           ),
         ),
+      ),
+      body: Stack(
+        children: [
+          GoogleMap(
+            initialCameraPosition: CameraPosition(
+              target: _center,
+              zoom: 11.0,
+            ),
+          ),
+        ],
       ),
       bottomNavigationBar: BottomNavigationBar(
         items: const [
