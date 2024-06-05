@@ -1,6 +1,9 @@
+import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:papproject/Screens/homeScreen.dart';
 
 class profileScreen extends StatefulWidget {
@@ -12,6 +15,9 @@ class profileScreen extends StatefulWidget {
 
 class _profileScreenState extends State<profileScreen> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
+  final ImagePicker _picker = ImagePicker();
+  File? _imageFile;
+  String? _imageURL;
 
   void _logout() async {
     await _auth.signOut();
@@ -19,16 +25,73 @@ class _profileScreenState extends State<profileScreen> {
         context, MaterialPageRoute(builder: (context) => homeScreen()));
   }
 
+  Future<void> _loadUserProfile() async {
+    User? user = _auth.currentUser;
+    if (user != null) {
+      DocumentSnapshot userDoc = await FirebaseFirestore.instance
+          .collection('user')
+          .doc(user.uid)
+          .get();
+      final data = userDoc.data() as Map<String, dynamic>?;
+      setState(() {
+        _imageURL = data != null && data.containsKey('imageUrl') ? data['imageUrl'] : null;
+      });
+    }
+  }
+
   Future<String> _fetchUserName() async {
     User? user = FirebaseAuth.instance.currentUser;
 
     if (user != null) {
-      DocumentSnapshot userDoc = await FirebaseFirestore.instance.collection('user').doc(user.uid).get();
+      DocumentSnapshot userDoc = await FirebaseFirestore.instance
+          .collection('user')
+          .doc(user.uid)
+          .get();
       return userDoc['name'];
     } else {
       throw Exception('NÃO ESTÁ LOGADO');
     }
   }
+
+  Future<void> _pickImage() async {
+    final pickedFile = await _picker.pickImage(source: ImageSource.gallery);
+    if (pickedFile != null) {
+      setState(() {
+        _imageFile = File(pickedFile.path);
+      });
+      await _uploadImage();
+    }
+  }
+
+  Future<void> _uploadImage() async {
+    User? user = _auth.currentUser;
+    if (user != null && _imageFile != null) {
+      Reference storageReference = FirebaseStorage.instance.ref().child('user_profiles/${user.uid}');
+      try {
+        UploadTask uploadTask = storageReference.putFile(_imageFile!);
+        TaskSnapshot snapshot = await uploadTask;
+        String fileURL = await snapshot.ref.getDownloadURL();
+        await FirebaseFirestore.instance.collection('user').doc(user.uid).update({
+          'imageUrl': fileURL,
+        });
+        setState(() {
+          _imageURL = fileURL;
+        });
+      } on FirebaseException catch (e) {
+        print("Erro no upload da imagem: ${e.message}");
+      } catch (e) {
+        print("Erro inesperado: $e");
+      }
+    }
+  }
+
+
+  @override
+  void initState() {
+    super.initState();
+    _loadUserProfile();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -65,12 +128,16 @@ class _profileScreenState extends State<profileScreen> {
                               child: Column(
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
-                                  CircleAvatar(
-                                    radius: 115,
-                                    backgroundImage: NetworkImage(
-                                        "https://cdn-icons-png.flaticon.com/512/3135/3135715.png"),
+                                  GestureDetector(
+                                    onTap: _pickImage,
+                                    child: CircleAvatar(
+                                        radius: 115,
+                                        backgroundImage: _imageURL != null
+                                            ? NetworkImage(_imageURL!)
+                                            : NetworkImage(
+                                                "https://cdn-icons-png.flaticon.com/512/4646/4646084.png")),
                                   ),
-                                  SizedBox(height: 10),
+                                  const SizedBox(height: 10),
                                   Text(
                                     snapshot.data ?? '',
                                     style: TextStyle(
@@ -91,14 +158,14 @@ class _profileScreenState extends State<profileScreen> {
                               onPressed: () => _confirmSignOut(context),
                             ),
                           ),
-                          const Positioned(
+                          Positioned(
                             width: 50,
                             height: 50,
                             top: 0,
                             right: 0,
                             child: IconButton(
                               icon: Icon(Icons.edit, color: Colors.green),
-                              onPressed: null,
+                              onPressed: _pickImage,
                             ),
                           ),
                         ],

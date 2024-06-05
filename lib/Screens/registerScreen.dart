@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:papproject/Screens/loginScreen.dart';
 
 import '../widgets/toast.dart';
 import 'homeScreen.dart';
@@ -177,7 +178,7 @@ class _registerScreenState extends State<registerScreen> {
                   SizedBox(height: 10),
                   TextButton(
                     onPressed: () {
-                      Navigator.pop(context);
+                      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => loginScreen()));
                     },
                     child: Text(
                       'Já tem uma conta?',

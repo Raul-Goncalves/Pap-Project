@@ -23,8 +23,7 @@ class _loginScreenState extends State<loginScreen> {
   String _error = '';
   bool _isSigningUp = false;
 
-
-  void _login() async{
+  void _login() async {
     setState(() {
       _isSigningUp = true;
     });
@@ -39,26 +38,27 @@ class _loginScreenState extends State<loginScreen> {
       return;
     }
 
-    try{
+    try {
       UserCredential userCredential = await _auth.signInWithEmailAndPassword(email: _emailController.text, password: _passwordController.text);
-          showToast(message: 'Seja bem-vindo ${userCredential.user?.email}');
-          Navigator.push(context, MaterialPageRoute(builder: (context) => homeScreen()));
-    }catch(e){
+      showToast(message: 'Seja bem-vindo ${userCredential.user?.email}');
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => homeScreen()));
+    } catch (e) {
       setState(() {
         _error = e.toString();
       });
-    }finally{
+    } finally {
       setState(() {
         _isSigningUp = false;
       });
     }
   }
 
-  void _navigatorToRegister(){
+  void _navigatorToRegister() {
     Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => registerScreen()));
   }
-  void _navigatorTradePassword(){
-    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => resPasswordScreen()));
+
+  void _navigatorToForgotPassword() {
+    Navigator.push(context, MaterialPageRoute(builder: (context) => resPasswordScreen()));
   }
 
   @override
@@ -128,10 +128,10 @@ class _loginScreenState extends State<loginScreen> {
                     alignment: Alignment.centerRight,
                     child: TextButton(
                       onPressed: () {
-                        _navigatorTradePassword();
+                        _navigatorToForgotPassword();
                       },
                       child: Text(
-                        'Esqueceu senha.',
+                        'Esqueceu a senha.',
                         style: TextStyle(
                           foreground: Paint()
                             ..shader = const LinearGradient(
@@ -154,31 +154,29 @@ class _loginScreenState extends State<loginScreen> {
                     style: ElevatedButton.styleFrom(
                       foregroundColor: Colors.blue,
                       backgroundColor: Colors.white,
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 50, vertical: 10),
+                      padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 10),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),
                     ),
                     child: _isSigningUp
                         ? CircularProgressIndicator(
-                            color: Colors.blue,
-                          )
+                      color: Colors.blue,
+                    )
                         : Text(
-                            'Entrar',
-                            style: TextStyle(
-                              fontSize: 25,
-                              foreground: Paint()
-                                ..shader = const LinearGradient(
-                                  colors: <Color>[
-                                    Color(0xFF000000),
-                                    Color(0xFF4432B0),
-                                    Color(0xFF0000FF),
-                                  ],
-                                ).createShader(
-                                    Rect.fromLTWH(0.0, 0.0, 150.0, 70.0)),
-                            ),
-                          ),
+                      'Entrar',
+                      style: TextStyle(
+                        fontSize: 25,
+                        foreground: Paint()
+                          ..shader = const LinearGradient(
+                            colors: <Color>[
+                              Color(0xFF000000),
+                              Color(0xFF4432B0),
+                              Color(0xFF0000FF),
+                            ],
+                          ).createShader(Rect.fromLTWH(0.0, 0.0, 150.0, 70.0)),
+                      ),
+                    ),
                   ),
                   SizedBox(height: 10),
                   TextButton(
