@@ -24,7 +24,7 @@ class _homeScreenState extends State<homeScreen> {
   String? _imageURL;
   GoogleMapController? _mapController;
   Polyline? _routePolyline;
-  final DirectionService _directionService = DirectionService(apiKey: 'AIzaSyBS3Z1Kd86PFG9fonu_DSBi3n7eCQMVg8E'); // Substitua pela sua chave de API
+  final DirectionService _directionService = DirectionService(apiKey: 'MY KEY'); // Substitua pela sua chave de API
 
   @override
   void initState() {
