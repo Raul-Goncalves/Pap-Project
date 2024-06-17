@@ -10,6 +10,7 @@
         android:label="papproject"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
+
         <activity
             android:name=".MainActivity"
             android:exported="true"
@@ -41,6 +42,11 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyBnChCRDnqV2988eO6rHqnbfGO_CC2iQ08"/>
+
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+
 
     </application>
     <!-- Required to query activities that can process text, see:

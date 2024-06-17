@@ -1,12 +1,19 @@
+import 'dart:convert';
+import 'dart:ffi';
 import 'dart:io';
+import 'dart:ui';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:papproject/Screens/busScreen.dart';
 import 'package:papproject/Screens/profileScreen.dart';
+import 'package:papproject/Screens/routesScreen.dart';
 import '../FireBase/direction_service.dart';
+import '../widgets/toast.dart';
 import 'loginScreen.dart';
 
 class homeScreen extends StatefulWidget {
@@ -17,20 +24,30 @@ class homeScreen extends StatefulWidget {
 }
 
 class _homeScreenState extends State<homeScreen> {
-  final LatLng _center = const LatLng(40.2826, -7.50326);
+
+  List<Marker> markers = [];
+
+  final LatLng _center = const LatLng(40.2826, -7.50326); // Covilhã
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final ImagePicker _picker = ImagePicker();
+
   File? _imageFile;
   String? _imageURL;
   GoogleMapController? _mapController;
-  Polyline? _routePolyline;
-  final DirectionService _directionService = DirectionService(apiKey: 'MY KEY'); // Substitua pela sua chave de API
 
-  @override
-  void initState() {
-    super.initState();
-    _loadUserProfile();
-    _getRoute();
+  int _selectButton = 0;
+  bool _MarkersVisile = false;
+
+  final DirectionService _directionService = DirectionService(apiKey: 'MINHA KEY');
+
+  Future<void> _loadMapStyle() async {
+    String style = await rootBundle.loadString('assets/map_style.json');
+    _mapController?.setMapStyle(style);
+  }
+
+  void _onMapCreated(GoogleMapController controller) {
+    _mapController = controller;
+    _loadMapStyle();
   }
 
   Future<void> _pickImage() async {
@@ -85,23 +102,81 @@ class _homeScreenState extends State<homeScreen> {
     }
   }
 
-  Future<void> _getRoute() async {
-    LatLng _startLocation = LatLng(40.2826, -7.50326); // Defina a localização inicial
-    LatLng _endLocation = LatLng(40.2918, -7.5073); // Defina a localização final
+  void _onItemTapped(int index){
+    setState(() {
+      if (index == 0) {
+        _MarkersVisile = !_MarkersVisile;
+        if (_MarkersVisile) {
+          _loadStops();
+          showToast(message: "Paragens Ativada no Mapa");
+        } else {
+          markers.clear();
+          showToast(message: "Paragens Desativadas no Mapa");
+        }
+      } else {
+        _selectButton = index;
+        if (index == 1) {
+          Navigator.push(context, MaterialPageRoute(builder: (context) => routeScreen()));
+        } else if (index == 2) {
+          Navigator.push(context, MaterialPageRoute(builder: (context) => busScreen()));
+        }
+      }
+    });
+  }
 
+  Future<void> _loadStops() async {
     try {
-      final List<LatLng> routeCoords = await _directionService.getRouteCoordinates(_startLocation, _endLocation);
-      setState(() {
-        _routePolyline = Polyline(
-          polylineId: PolylineId('route'),
-          points: routeCoords,
-          color: Colors.blue,
-          width: 5,
-        );
-      });
+      String data = await rootBundle.loadString('assets/routes.json');
+      final jsonResult = json.decode(data);
+
+      if (jsonResult.containsKey('routes') && jsonResult['routes'] is List) {
+        List<dynamic> routes = jsonResult['routes'];
+
+        var line11Route = routes.firstWhere((route) => route['line'] == 11, orElse: () => null);
+        if (line11Route != null && line11Route.containsKey('stops') && line11Route['stops'] is List) {
+          List<dynamic> stops = line11Route['stops'];
+
+          double desiredIconSize = 32.0;
+
+          setState(() {
+            markers.clear();
+            for (var stop in stops) {
+              double lat = stop['latitude'];
+              double lng = stop['longitude'];
+              String name = stop['name'];
+
+              markers.add(
+                Marker(
+                  markerId: MarkerId(name),
+                  position: LatLng(lat, lng),
+                  infoWindow: InfoWindow(title: name),
+                  icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueCyan),
+                    onTap: () {
+                    // Ao clicar no marcador, pode-se implementar a navegação para outra tela ou ação desejada
+                    print('Clicou no marcador: $name');
+                    // Exemplo: navegação para outra tela passando lat e lng
+                  },
+                ),
+              );
+            }
+          });
+        } else {
+          print('Nenhuma lista de paradas encontrada na rota com line: 11.');
+        }
+      } else {
+        print('Nenhuma rota encontrada no JSON.');
+      }
     } catch (e) {
-      print("Erro ao obter a rota: $e");
+      print('Erro ao carregar paragens: $e');
     }
+  }
+
+
+  @override
+  void initState() {
+    super.initState();
+    _loadMapStyle();
+    _loadUserProfile();
   }
 
   @override
@@ -131,7 +206,7 @@ class _homeScreenState extends State<homeScreen> {
                       : const NetworkImage("https://cdn-icons-png.flaticon.com/512/4646/4646084.png"),
                 ),
               ),
-              contentPadding: const EdgeInsets.symmetric(vertical: 10.0),
+              contentPadding: EdgeInsets.symmetric(vertical: 10.0),
             ),
           ),
         ),
@@ -139,25 +214,23 @@ class _homeScreenState extends State<homeScreen> {
       body: Stack(
         children: [
           GoogleMap(
+            onMapCreated: _onMapCreated,
             initialCameraPosition: CameraPosition(
               target: _center,
-              zoom: 14.0,
+              zoom: 14,
             ),
-            myLocationButtonEnabled: true,
-            myLocationEnabled: true,
-            onMapCreated: (GoogleMapController controller) {
-              _mapController = controller;
-            },
-            polylines: _routePolyline != null ? {_routePolyline!} : {},
+            markers: Set<Marker>.from(markers),
           ),
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.location_on), label: "Paragens"),
-          BottomNavigationBarItem(icon: Icon(Icons.access_time), label: "Horários"),
+          BottomNavigationBarItem(icon: Icon(Icons.access_time), label: "Rotas"),
           BottomNavigationBarItem(icon: Icon(Icons.directions_bus), label: "Ônibus"),
         ],
+        currentIndex:  _selectButton,
+        onTap:  _onItemTapped,
       ),
     );
   }
