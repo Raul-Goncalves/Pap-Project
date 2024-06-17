@@ -29,6 +29,8 @@ dependencies:
   flutterfire_cli: ^0.1.1+2
   flutter_config: ^2.0.2
   fluttertoast: ^8.2.5
+  flutter_polyline_points: ^2.0.0
+
 
 
 
@@ -47,3 +49,6 @@ flutter:
     - assets/background.jpg
     - assets/wave.json
     - assets/back_ground.png
+    - assets/map_style.json
+    - assets/routes.json
+    - assets/stopBus.png
