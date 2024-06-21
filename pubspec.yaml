@@ -47,8 +47,12 @@ flutter:
   uses-material-design: true
   assets:
     - assets/background.jpg
-    - assets/wave.json
     - assets/back_ground.png
+    - assets/icone100x100.png
+    - assets/wave.json
     - assets/map_style.json
-    - assets/routes.json
-    - assets/stopBus.png
+    - assets/rotas/all_stops_bus.json
+    - assets/rotas/rotaUBI_IDA.json
+    - assets/rotas/rota10_IDA.json
+    - assets/rotas/rota11_IDA.json
+    - assets/rotas/rota12_IDA.json
