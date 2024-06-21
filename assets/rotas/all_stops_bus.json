@@ -1,0 +1,774 @@
+{
+  "rota": [
+    {
+      "line": 11,
+      "stops": [
+        {
+          "id": 70065,
+          "name": "POLO IV",
+          "latitude": 40.288803, "longitude": -7.515155
+        },
+        {
+          "id": 76,
+          "name": "CAFÉ MILLENIUM",
+          "latitude": 40.28716187186816, "longitude": -7.512446873219082
+        },
+        {
+          "id": 70071,
+          "name": "MODATEX",
+          "latitude": 40.285237, "longitude":-7.508850
+        },
+        {
+          "id": 70069,
+          "name": "BOMBEIROS",
+          "latitude": 40.283423726817034, "longitude": -7.506147225407347
+        },
+        {
+          "id": 70054,
+          "name": "RUA GREGÓRIO GERALDES I",
+          "latitude": 40.281998, "longitude": -7.506777
+        },
+        {
+          "id": 70204,
+          "name": "PRAÇA DO MUNICIPIO",
+          "latitude": 40.280518, "longitude": -7.504172
+        },
+        {
+          "id": 70023,
+          "name": "SHOPPING SPORTING I",
+          "latitude": 40.280192, "longitude": -7.502764
+        },
+        {
+          "id": 8,
+          "name": "GARAGEM SÃO JOÃO I",
+          "latitude": 40.282145, "longitude": -7.502117
+        },
+        {
+          "id": 9,
+          "name": "ELEVADOR DO JARDIM I",
+          "latitude": 40.284443, "longitude": -7.503099
+        },
+        {
+          "id": 70043,
+          "name": "PONTE DA CARPINTEIRA I",
+          "latitude" :40.28472, "longitude": -7.50302
+        },
+        {
+          "id": 118,
+          "name": "GRUPO RODRIGO I",
+          "latitude": 40.28358228920115, "longitude": -7.499605292253323
+        },
+        {
+          "id": 119,
+          "name": "ESC. DO RODRIGO I",
+          "latitude": 40.281126, "longitude": -7.498951
+        },
+        {
+          "id": 120,
+          "name": "R. MATHEUS FERNANDES I",
+          "latitude": 40.279399, "longitude": -7.498284
+        },
+        {
+          "id": 68,
+          "name": "TRIBUNAL I",
+          "latitude": 40.277209, "longitude": -7.498538
+        },
+        {
+          "id": 70049,
+          "name": "ESC.FREI HEITOR PINTO I",
+          "latitude": 40.276990, "longitude": -7.500168
+
+        },
+        {
+          "id": 27,
+          "name": "BIBILOTECA MUNICIPAL I",
+          "latitude": 40.27543622768973, "longitude":-7.498675440417431
+        },
+        {
+          "id": 121,
+          "name": "TERMINAL RODOVIÁRIO I",
+          "latitude": 40.2738376082665, "longitude": -7.498798171696929
+        },
+        {
+          "id": 70125,
+          "name": " CIMA SERRA SHOPPING",
+          "latitude": 40.271610, "longitude": -7.500873
+        },
+        {
+          "id": 123,
+          "name": "BAIXO SERRA SHOPPING",
+          "latitude": 40.270154812818035, "longitude": -7.500176763539816
+        },
+        {
+          "id": 124,
+          "name": "RUA CENTRO DAS ARTES",
+          "latitude": 40.270847, "longitude":-7.498301
+        },
+        {
+          "id": 70010,
+          "name": "INTERMACHÉ I",
+          "latitude": 40.270795, "longitude": -7.493582
+        },
+        {
+          "id": 126,
+          "name": "UBI POLO III",
+          "latitude":40.268685, "longitude": -7.494487
+        },
+        {
+          "id": 49,
+          "name": "HOTEL PURA LÃ I",
+          "latitude": 40.267356, "longitude":-7.496755
+        },
+        {
+          "id": 127,
+          "name": "ALAMÊDA PÊRO DA COVILHÃ",
+          "latitude": 40.266160, "longitude":-7.494587
+        },
+        {
+          "id": 11,
+          "name": "GALP",
+          "latitude": 40.264990, "longitude":-7.491241
+        },
+
+
+        {
+          "id": 70154,
+          "name": "HOSPITAL",
+          "latitude": 40.265220, "longitude": -7.492205
+        },
+        {
+          "id": 70155,
+          "name": "HOTEL PURA LÃ II",
+          "latitude": 40.267291, "longitude": -7.496240
+        },
+        {
+          "id": 70156,
+          "name": "UBI - POLO III",
+          "latitude": 40.268599, "longitude": -7.494054
+        },
+        {
+          "id": 70011,
+          "name": "INTERMACHÉ II",
+          "latitude": 40.270840, "longitude": -7.494113
+        },
+        {
+          "id": 70012,
+          "name": "AV. DO ANIL",
+          "latitude": 40.272428, "longitude": -7.497750
+        },
+        {
+          "id": 70171,
+          "name": "BAIRRO DAS ARTES I",
+          "latitude": 40.272421, "longitude": -7.498810
+        },
+        {
+          "id": 70172,
+          "name": "BAIRRO DAS ARTES II",
+          "latitude": 40.270297, "longitude": -7.500630
+        },
+        {
+          "id": 70175,
+          "name": "SERRA SHOPPING",
+          "latitude": 40.270438, "longitude": -7.501603
+        },
+        {
+          "id": 122,
+          "name": "TERMINAL RODOVIÁRIO II",
+          "latitude": 40.273927, "longitude": -7.498402
+        },
+        {
+          "id": 70016,
+          "name": "BIBILOTECA MUNICIPAL II",
+          "latitude": 40.27553, "longitude": -7.498844
+        },
+        {
+          "id": 5,
+          "name": "ESC.FREI HEITOR PINTO II",
+          "latitude": 40.277309, "longitude": -7.499889
+        },
+        {
+          "id": 89674,
+          "name": "TRIBUNAL II",
+          "latitude": 40.277044, "longitude": -7.498378
+        },
+        {
+          "id": 70052,
+          "name": "R. MATHEUS FERNANDES II",
+          "latitude": 40.279754, "longitude": -7.498164
+        },
+        {
+          "id": 70053,
+          "name": "ESC. DO RODRIGO II",
+          "latitude": 40.281459, "longitude": -7.499035
+        },
+        {
+          "id": 70052,
+          "name": "GRUPO RODRIGO II",
+          "latitude": 40.283555, "longitude": -7.499410
+        },
+        {
+          "id": 70053,
+          "name": "PONTE DA CARPINTEIRA II",
+          "latitude": 40.28504, "longitude": -7.50349
+        },
+        {
+          "id": 70044,
+          "name": "ELEVADOR JARDIM II",
+          "latitude": 40.284474, "longitude": -7.503285
+        },
+        {
+          "id": 70045,
+          "name": "GARAGEM SÃO JOÃO II",
+          "latitude": 40.281869, "longitude": -7.502005
+        },
+        {
+          "id": 70002,
+          "name": "SHOPPING SPORTING II",
+          "latitude": 40.280290, "longitude": -7.502572
+        },
+        {
+          "id": 70204,
+          "name": "PRAÇA DO MUNICIPIO",
+          "latitude": 40.280518, "longitude": -7.504172
+        },
+        {
+          "id": 70054,
+          "name": "RUA GREGÓRIO GERALDES II",
+          "latitude": 40.281996, "longitude": -7.506958
+        },
+        {
+          "id": 70055,
+          "name": "SANTA CASA DA MISERICÓRDIA",
+          "latitude": 40.282138, "longitude": -7.508671
+        },
+        {
+          "id": 130,
+          "name": "CEMITÉRIO",
+          "latitude": 40.283390, "longitude": -7.509698
+        },
+        {
+          "id": 70063,
+          "name": "GRUPO CAMPOS MELO",
+          "latitude": 40.28466, "longitude": -7.51198
+        },
+        {
+          "id": 70064,
+          "name": "RUA JOSÉ CAETANO JR.",
+          "latitude": 40.286406, "longitude": -7.513869
+        },
+        {
+          "id": 70065,
+          "name": "UBI POLO IV",
+          "latitude": 40.288801, "longitude": -7.515149
+        },
+
+
+
+        {
+          "id": 12,
+          "name": "TERMINAL RODOVIÁRIO",
+          "latitude": 40.273752, "longitude": -7.497757
+        },
+        {
+          "id": 177,
+          "name": "ESTAÇÃO CP(PROVISÓRIO)",
+          "latitude": 40.277823, "longitude": -7.496752
+        },
+        {
+          "id": 68,
+          "name": "TRIBUNAL I",
+          "latitude": 40.277209, "longitude": -7.498538
+        },
+        {
+          "id": 89672,
+          "name": "ESC. FREI/CAMPOS",
+          "latitude": 40.278592, "longitude": -7.500973
+        },
+        {
+          "id": 7,
+          "name": "AV. 25 DE ABRIL",
+          "latitude": 40.279718, "longitude": -7.501460
+        },
+        {
+          "id": 6,
+          "name": "GARAGEM DE SÃO JOÃO III",
+          "latitude": 40.281724, "longitude": -7.501338
+        },
+        {
+          "id": 70002,
+          "name": "SHOPPING SPORTING II",
+          "latitude": 40.280290, "longitude": -7.502572
+        },
+        {
+          "id": 70204,
+          "name": "PRAÇA DO MUNICIPIO",
+          "latitude": 40.280518, "longitude": -7.504172
+        },
+        {
+          "id": 70054,
+          "name": "RUA GREGÓRIO GERALDES II",
+          "latitude": 40.281996, "longitude": -7.506958
+        },
+        {
+          "id": 70055,
+          "name": "SANTA CASA DA MISERICÓRDIA",
+          "latitude": 40.282138, "longitude": -7.508671
+        },
+        {
+          "id": 130,
+          "name": "CEMITÉRIO",
+          "latitude": 40.283390, "longitude": -7.509698
+        },
+        {
+          "id": 70063,
+          "name": "GRUPO CAMPOS MELO",
+          "latitude": 40.28466, "longitude": -7.51198
+        },
+        {
+          "id": 70064,
+          "name": "RUA JOSÉ CAETANO JR.",
+          "latitude": 40.286406, "longitude": -7.513869
+        },
+        {
+          "id": 70065,
+          "name": "UBI POLO IV",
+          "latitude": 40.288801, "longitude": -7.515149
+        },
+        {
+          "id": 76,
+          "name": "CAFÉ MILLENIUM",
+          "latitude": 40.28716187186816, "longitude": -7.512446873219082
+        },
+        {
+          "id": 70071,
+          "name": "MODATEX",
+          "latitude": 40.285237, "longitude":-7.508850
+        },
+        {
+          "id": 70069,
+          "name": "BOMBEIROS",
+          "latitude": 40.283423726817034, "longitude": -7.506147225407347
+        },
+        {
+          "id": 70054,
+          "name": "RUA GREGÓRIO GERALDES I",
+          "latitude": 40.281998, "longitude": -7.506777
+        },
+        {
+          "id": 70204,
+          "name": "PRAÇA DO MUNICIPIO",
+          "latitude": 40.280518, "longitude": -7.504172
+        },
+        {
+          "id": 70023,
+          "name": "SHOPPING SPORTING I",
+          "latitude": 40.280192, "longitude": -7.502764
+        },
+        {
+          "id": 70003,
+          "name": "COLÉGIO DAS FREIRAS",
+          "latitude": 40.278414, "longitude": -7.503666
+        },
+        {
+          "id": 70005,
+          "name": "UBI",
+          "latitude": 40.277928, "longitude": -7.508557
+        },
+        {
+          "id": 70117,
+          "name": "UBI - ACÇÃO SOCIAL",
+          "latitude": 40.273718, "longitude": -7.507414
+        },
+        {
+          "id": 70118,
+          "name": "R. DE SANTO ANTÓNIO",
+          "latitude": 40.271801, "longitude": -7.509942
+        },
+        {
+          "id": 70119,
+          "name": "TRAVESSA DE SANTO ANTÓNIO",
+          "latitude": 40.270412, "longitude": -7.511739
+        },
+        {
+          "id": 70120,
+          "name": "LARGO DE SANTO ANTÓNIO",
+          "latitude": 40.268392, "longitude": -7.513595
+        },
+        {
+          "id": 70207,
+          "name": "RUA DO COMÉRCIO",
+          "latitude": 40.266946, "longitude": -7.515857
+        },
+        {
+          "id": 70122,
+          "name": "TRAVESSA DA AMOREIRA",
+          "latitude": 40.267160, "longitude": -7.512049
+        },
+        {
+          "id": 70122,
+          "name": "RUA DA AMOREIRA",
+          "latitude": 40.267313, "longitude": -7.510402
+        },
+        {
+          "id": 70123,
+          "name": "REFÚGIO",
+          "latitude": 40.266217, "longitude": -7.506976
+        },
+        {
+          "id": 70211,
+          "name": "QUINTA DO SOL",
+          "latitude": 40.264487, "longitude": -7.506858
+        },
+        {
+          "id": 70212,
+          "name": "GP. RECREATIVO REFÚGIO",
+          "latitude": 40.262598, "longitude": -7.506362
+        },
+        {
+          "id": 23,
+          "name": "TCT REFÚGIO",
+          "latitude": 40.262288, "longitude": -7.505080
+        },
+        {
+          "id": 23,
+          "name": "ROTUNDA DOS CALDEIRÓES",
+          "latitude": 40.264835, "longitude": -7.503542
+        },
+        {
+          "id": 89678,
+          "name": "REPSOL",
+          "latitude": 40.280192, "longitude": -7.502764
+        },
+        {
+          "id": 70156,
+          "name": "UBI - POLO III",
+          "latitude": 40.268599, "longitude": -7.494054
+        },
+        {
+          "id": 70011,
+          "name": "INTERMACHÉ II",
+          "latitude": 40.270840, "longitude": -7.494113
+        },
+        {
+          "id": 70012,
+          "name": "AV. DO ANIL",
+          "latitude": 40.272428, "longitude": -7.497750
+        },
+        {
+          "id": 70171,
+          "name": "BAIRRO DAS ARTES I",
+          "latitude": 40.272421, "longitude": -7.498810
+        },
+        {
+          "id": 70172,
+          "name": "BAIRRO DAS ARTES II",
+          "latitude": 40.270297, "longitude": -7.500630
+        },
+        {
+          "id": 70175,
+          "name": "SERRA SHOPPING",
+          "latitude": 40.270438, "longitude": -7.501603
+        },
+        {
+          "id": 12,
+          "name": "TERMINAL RODOVIÁRIO",
+          "latitude": 40.273752, "longitude": -7.497757
+        },
+
+
+        {
+          "id": 51,
+          "name": "BAIRRO BIQUINHA TERMINAL",
+          "latitude": 40.283805, "longitude": -7.516175
+        },
+        {
+          "id": 70060,
+          "name": "BAIRRO BIQUINHA II",
+          "latitude": 40.283914, "longitude": -7.513685
+        },
+        {
+          "id": 70061,
+          "name": "ESTÁDIO MUNICIPAL",
+          "latitude": 40.283237, "longitude": -7.512820
+        },
+        {
+          "id": 156,
+          "name": "GRUPO MATA I",
+          "latitude": 40.28161, "longitude": -7.51264
+        },
+        {
+          "id": 70057,
+          "name": "R. MONTES HEMINIOS I",
+          "latitude": 40.28113, "longitude": -7.51236
+        },
+        {
+          "id": 158,
+          "name": "R. MONTES HEMINIOS II",
+          "latitude": 40.28099, "longitude": -7.51047
+        },
+        {
+          "id": 13,
+          "name": "SANTA CASA DA MISERICÓDIA II",
+          "latitude": 40.282003, "longitude": -7.508633
+        },
+        {
+          "id": 14,
+          "name": "RUA GREGÓRIO GERALDES III",
+          "latitude": 40.281964, "longitude": -7.507161
+        },
+        {
+          "id": 70204,
+          "name": "PRAÇA DO MUNICIPIO",
+          "latitude": 40.280518, "longitude": -7.504172
+        },
+        {
+          "id": 70023,
+          "name": "SHOPPING SPORTING I",
+          "latitude": 40.280192, "longitude": -7.502764
+        },
+        {
+          "id": 70003,
+          "name": "COLÉGIO DAS FREIRAS",
+          "latitude": 40.278414, "longitude": -7.503666
+        },
+        {
+          "id": 70005,
+          "name": "UBI",
+          "latitude": 40.277928, "longitude": -7.508557
+        },
+        {
+          "id": 70006,
+          "name": "AV. DA UNIVERSIDADE",
+          "latitude": 40.274387, "longitude": -7.503458
+        },
+        {
+          "id": 70007,
+          "name": "FINANÇAS ANTIGAS",
+          "latitude": 40.274593, "longitude": -7.502149
+        },
+        {
+          "id": 70008,
+          "name": "ESC. PALMEIRAS",
+          "latitude": 40.273767, "longitude": -7.500475
+        },
+        {
+          "id": 122,
+          "name": "TERMINAL RODOVIÁRIO II",
+          "latitude": 40.273927, "longitude": -7.498402
+        },
+        {
+          "id": 70178,
+          "name": "INATEL I",
+          "latitude": 40.278956, "longitude": -7.495785
+        },
+        {
+          "id": 70189,
+          "name": "ESPAÇO DAS IDADES",
+          "latitude": 40.278300, "longitude": -7.494198
+        },
+        {
+          "id": 70180,
+          "name": "GNR COVILHÃ",
+          "latitude": 40.27874, "longitude": -7.49142
+        },
+        {
+          "id": 70181,
+          "name": "QUINTA ROSA",
+          "latitude": 40.280259, "longitude": -7.488816
+        },
+        {
+          "id": 173,
+          "name": "QTA. ROSA",
+          "latitude": 40.281148, "longitude": -7.491331
+        },
+        {
+          "id": 174,
+          "name": "CIVETE",
+          "latitude": 40.280106, "longitude": -7.493148
+        },
+        {
+          "id": 50,
+          "name": "INATEL II",
+          "latitude": 40.27901, "longitude": -7.49587
+        },
+        {
+          "id": 50,
+          "name": "INATEL II",
+          "latitude": 40.27901, "longitude": -7.49587
+        },
+        {
+          "id": 70016,
+          "name": "BIBILOTECA MUNICIPAL II",
+          "latitude": 40.27553, "longitude": -7.498844
+        },
+        {
+          "id": 70016,
+          "name": "R. CIDADE DO FUNDÃO",
+          "latitude": 40.277657, "longitude": -7.501322
+        },
+        {
+          "id": 7,
+          "name": "AV. 25 DE ABRIL",
+          "latitude": 40.279718, "longitude": -7.501460
+        },
+        {
+          "id": 6,
+          "name": "GARAGEM DE SÃO JOÃO III",
+          "latitude": 40.281724, "longitude": -7.501338
+        },{
+          "id": 70002,
+          "name": "SHOPPING SPORTING II",
+          "latitude": 40.280290, "longitude": -7.502572
+        },
+        {
+          "id": 70204,
+          "name": "PRAÇA DO MUNICIPIO",
+          "latitude": 40.280518, "longitude": -7.504172
+        },
+
+
+
+        {
+          "id": 51,
+          "name": "BAIRRO BIQUINHA TERMINAL",
+          "latitude": 40.283805,
+          "longitude": -7.516175
+        },
+        {
+          "id": 70060,
+          "name": "BAIRRO BIQUINHA II",
+          "latitude": 40.283914, "longitude": -7.513685
+        },
+        {
+          "id": 70061,
+          "name": "ESTÁDIO MUNICIPAL",
+          "latitude": 40.283237, "longitude": -7.512820
+        },
+        {
+          "id": 156,
+          "name": "GRUPO MATA I",
+          "latitude": 40.28161, "longitude": -7.51264
+        },
+        {
+          "id": 70057,
+          "name": "R. MONTES HEMINIOS I",
+          "latitude": 40.28113, "longitude": -7.51236
+        },
+        {
+          "id": 158,
+          "name": "R. MONTES HEMINIOS II",
+          "latitude": 40.28099, "longitude": -7.51047
+        },
+        {
+          "id": 13,
+          "name": "SANTA CASA DA MISERICÓDIA II",
+          "latitude": 40.282003, "longitude": -7.508633
+        },
+        {
+          "id": 14,
+          "name": "SANTA CASA DA MISERICÓDIA II",
+          "latitude": 40.282003, "longitude": -7.508633
+        },
+        {
+          "id": 14,
+          "name": "RUA GREGÓRIO GERALDES III",
+          "latitude": 40.281964, "longitude": -7.507161
+        },
+        {
+          "id": 70204,
+          "name": "PRAÇA DO MUNICIPIO",
+          "latitude": 40.280518, "longitude": -7.504172
+        },
+        {
+          "id": 70023,
+          "name": "SHOPPING SPORTING",
+          "latitude": 40.280192, "longitude": -7.502764
+        },{
+          "id": 70003,
+          "name": "COLÉGIO DAS FREIRAS",
+          "latitude": 40.278414, "longitude": -7.503666
+        },
+        {
+          "id": 70005,
+          "name": "UBI",
+          "latitude": 40.277928, "longitude": -7.508557
+        },
+        {
+          "id": 161,
+          "name": "QTA. SANTO ANTÓNIO",
+          "latitude": 40.275276, "longitude": -7.507296
+        },
+        {
+          "id": 70117,
+          "name": "UBI - ACÇÃO SOCIAL",
+          "latitude": 40.273718, "longitude": -7.507414
+        },
+        {
+          "id": 70118,
+          "name": "R. DE SANTO ANTÓNIO",
+          "latitude": 40.271801, "longitude": -7.509942
+        },
+        {
+          "id": 70119,
+          "name": "TRAVESSA DE SANTO ANTÓNIO",
+          "latitude": 40.270412, "longitude": -7.511739
+        },
+        {
+          "id": 70120,
+          "name": "LARGO DE SANTO ANTÓNIO",
+          "latitude": 40.268392, "longitude": -7.513595
+        },
+        {
+          "id": 70207,
+          "name": "RUA DO COMÉRCIO",
+          "latitude": 40.266946, "longitude": -7.515857
+        },
+        {
+          "id": 70122,
+          "name": "TRAVESSA DA AMOREIRA",
+          "latitude": 40.267160, "longitude": -7.512049
+        },
+        {
+          "id": 70122,
+          "name": "RUA DA AMOREIRA",
+          "latitude": 40.267313, "longitude": -7.510402
+        },
+        {
+          "id": 70123,
+          "name": "REFÚGIO",
+          "latitude": 40.266217, "longitude": -7.506976
+        },
+        {
+          "id": 70211,
+          "name": "QUINTA DO SOL",
+          "latitude": 40.264487, "longitude": -7.506858
+        },
+        {
+          "id": 70212,
+          "name": "GP. RECREATIVO REFÚGIO",
+          "latitude": 40.262598, "longitude": -7.506362
+        },
+        {
+          "id": 23,
+          "name": "TCT REFÚGIO",
+          "latitude": 40.262288, "longitude": -7.505080
+        },
+        {
+          "id": 23,
+          "name": "ROTUNDA DOS CALDEIRÓES",
+          "latitude": 40.264835, "longitude": -7.503542
+        },
+        {
+          "id": 24,
+          "name": "CENTRO DE SAÚDE",
+          "latitude": 40.26790, "longitude": -7.50469
+        },
+        {
+          "id": 70158,
+          "name": "POSTO TURISMO",
+          "latitude": 40.271980, "longitude": -7.503850
+        }
+      ]
+    }
+  ]
+}

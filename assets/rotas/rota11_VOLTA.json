@@ -1,0 +1,136 @@
+{
+  "rota": [
+    {
+      "line": 11,
+      "name": "HOSPITAL - POLO IV",
+      "description": "VOLTA",
+      "stops": [
+        {
+          "id": 70154,
+          "name": "HOSPITAL",
+          "latitude": 40.265220, "longitude": -7.492205
+        },
+        {
+          "id": 70155,
+          "name": "HOTEL PURA LÃ",
+          "latitude": 40.267291, "longitude": -7.496240
+        },
+        {
+          "id": 70156,
+          "name": "UBI - POLO III",
+          "latitude": 40.268599, "longitude": -7.494054
+        },
+        {
+          "id": 70011,
+          "name": "INTERMACHÉ",
+          "latitude": 40.270840, "longitude": -7.494113
+        },
+        {
+          "id": 70012,
+          "name": "AV. DO ANIL",
+          "latitude": 40.272428, "longitude": -7.497750
+        },
+        {
+          "id": 70171,
+          "name": "BAIRRO DAS ARTES I",
+          "latitude": 40.272421, "longitude": -7.498810
+        },
+        {
+          "id": 70172,
+          "name": "BAIRRO DAS ARTES II",
+          "latitude": 40.270297, "longitude": -7.500630
+        },
+        {
+          "id": 70175,
+          "name": "SERRA SHOPPING",
+          "latitude": 40.270438, "longitude": -7.501603
+        },
+        {
+          "id": 70016,
+          "name": "BIBLOTECA",
+          "latitude": 40.27553, "longitude": -7.498844
+        },
+        {
+          "id": 5,
+          "name": "ESC.FREI",
+          "latitude": 40.277309, "longitude": -7.499889
+        },
+        {
+          "id": 89674,
+          "name": "TRIBUNAL",
+          "latitude": 40.277044, "longitude": -7.498378
+        },
+        {
+          "id": 70052,
+          "name": "R. MATHEUS FERNANDES",
+          "latitude": 40.279754, "longitude": -7.498164
+        },
+        {
+          "id": 70053,
+          "name": "ESC. DO RODRIGO",
+          "latitude": 40.281459, "longitude": -7.499035
+        },
+        {
+          "id": 70052,
+          "name": "GRUPO RODRIGO",
+          "latitude": 40.283555, "longitude": -7.499410
+        },
+        {
+          "id": 70053,
+          "name": "PONTE DA CARPINTEIRA",
+          "latitude": 40.285031, "longitude": -7.503493
+        },
+        {
+          "id": 70044,
+          "name": "ELEVADOR JARDIM",
+          "latitude": 40.284474, "longitude": -7.503285
+        },
+        {
+          "id": 70045,
+          "name": "GARAGEM SÃO JOÃO",
+          "latitude": 40.281869, "longitude": -7.502005
+        },
+        {
+          "id": 70002,
+          "name": "SHOPPING SPORTING",
+          "latitude": 40.280290, "longitude": -7.502572
+        },
+        {
+          "id": 70204,
+          "name": "PRAÇA MUNICIPAL",
+          "latitude": 40.280518, "longitude": -7.504172
+        },
+        {
+          "id": 70054,
+          "name": "RUA GREGÓRIO GERALDES",
+          "latitude": 40.281996, "longitude": -7.506958
+        },
+        {
+          "id": 70055,
+          "name": "SANTA CASA DA MISERICÓRDIA",
+          "latitude": 40.282138, "longitude": -7.508671
+        },
+        {
+          "id": 130,
+          "name": "CEMITÉRIO",
+          "latitude": 40.283390, "longitude": -7.509698
+        },
+        {
+          "id": 70063,
+          "name": "GRUPO CAMPOS MELO",
+          "latitude": 40.28466, "longitude": -7.51198
+        },
+        {
+          "id": 70064,
+          "name": "RUA JOSÉ CAETANO JR.",
+          "latitude": 40.286406, "longitude": -7.513869
+        },
+        {
+          "id": 70065,
+          "name": "UBI POLO IV",
+          "latitude": 40.288801, "longitude": -7.515149
+        }
+      ]
+    }
+  ]
+}

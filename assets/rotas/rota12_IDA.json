@@ -1,0 +1,151 @@
+{
+  "rota": [
+    {
+      "line": 12,
+      "name": "BIQUINHA - C. SAÚDE",
+      "description": "IDA",
+      "stops": [
+        {
+          "id": 51,
+          "name": "BAIRRO BIQUINHA TERMINAL",
+          "latitude": 40.283805,
+          "longitude": -7.516175
+        },
+        {
+          "id": 70060,
+          "name": "BAIRRO BIQUINHA II",
+          "latitude": 40.283914, "longitude": -7.513685
+        },
+        {
+          "id": 70061,
+          "name": "ESTÁDIO MUNICIPAL",
+          "latitude": 40.283237, "longitude": -7.512820
+        },
+        {
+          "id": 156,
+          "name": "GRUPO MATA I",
+          "latitude": 40.28161, "longitude": -7.51264
+        },
+        {
+          "id": 70057,
+          "name": "R. MONTES HEMINIOS I",
+          "latitude": 40.28113, "longitude": -7.51236
+        },
+        {
+          "id": 158,
+          "name": "R. MONTES HEMINIOS II",
+          "latitude": 40.28099, "longitude": -7.51047
+        },
+        {
+          "id": 13,
+          "name": "SANTA CASA DA MISERICÓDIA II",
+          "latitude": 40.282003, "longitude": -7.508633
+        },
+        {
+          "id": 14,
+          "name": "SANTA CASA DA MISERICÓDIA II",
+          "latitude": 40.282003, "longitude": -7.508633
+        },
+        {
+          "id": 14,
+          "name": "RUA GREGÓRIO GERALDES III",
+          "latitude": 40.281964, "longitude": -7.507161
+        },
+        {
+          "id": 70204,
+          "name": "PRAÇA DO MUNICIPIO",
+          "latitude": 40.280518, "longitude": -7.504172
+        },
+        {
+          "id": 70023,
+          "name": "SHOPPING SPORTING",
+          "latitude": 40.280192, "longitude": -7.502764
+        },{
+          "id": 70003,
+          "name": "COLÉGIO DAS FREIRAS",
+          "latitude": 40.278414, "longitude": -7.503666
+        },
+        {
+          "id": 70005,
+          "name": "UBI",
+          "latitude": 40.277928, "longitude": -7.508557
+        },
+        {
+          "id": 161,
+          "name": "QTA. SANTO ANTÓNIO",
+          "latitude": 40.275276, "longitude": -7.507296
+        },
+        {
+          "id": 70117,
+          "name": "UBI - ACÇÃO SOCIAL",
+          "latitude": 40.273718, "longitude": -7.507414
+        },
+        {
+          "id": 70118,
+          "name": "R. DE SANTO ANTÓNIO",
+          "latitude": 40.271801, "longitude": -7.509942
+        },
+        {
+          "id": 70119,
+          "name": "TRAVESSA DE SANTO ANTÓNIO",
+          "latitude": 40.270412, "longitude": -7.511739
+        },
+        {
+          "id": 70120,
+          "name": "LARGO DE SANTO ANTÓNIO",
+          "latitude": 40.268392, "longitude": -7.513595
+        },
+        {
+          "id": 70207,
+          "name": "RUA DO COMÉRCIO",
+          "latitude": 40.266946, "longitude": -7.515857
+        },
+        {
+          "id": 70122,
+          "name": "TRAVESSA DA AMOREIRA",
+          "latitude": 40.267160, "longitude": -7.512049
+        },
+        {
+          "id": 70122,
+          "name": "RUA DA AMOREIRA",
+          "latitude": 40.267313, "longitude": -7.510402
+        },
+        {
+          "id": 70123,
+          "name": "REFÚGIO",
+          "latitude": 40.266217, "longitude": -7.506976
+        },
+        {
+          "id": 70211,
+          "name": "QUINTA DO SOL",
+          "latitude": 40.264487, "longitude": -7.506858
+        },
+        {
+          "id": 70212,
+          "name": "GP. RECREATIVO REFÚGIO",
+          "latitude": 40.262598, "longitude": -7.506362
+        },
+        {
+          "id": 23,
+          "name": "TCT REFÚGIO",
+          "latitude": 40.262288, "longitude": -7.505080
+        },
+        {
+          "id": 23,
+          "name": "ROTUNDA DOS CALDEIRÓES",
+          "latitude": 40.264835, "longitude": -7.503542
+        },
+        {
+          "id": 24,
+          "name": "CENTRO DE SAÚDE",
+          "latitude": 40.26790, "longitude": -7.50469
+        },
+        {
+          "id": 70158,
+          "name": "POSTO TURISMO",
+          "latitude": 40.271980, "longitude": -7.503850
+        }
+      ]
+    }
+  ]
+}

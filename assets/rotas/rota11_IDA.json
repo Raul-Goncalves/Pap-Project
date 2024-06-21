@@ -1,0 +1,138 @@
+{
+  "rota": [
+    {
+      "line": 11,
+      "name": "POLO IV - HOSPITAL",
+      "description": "IDA",
+      "stops": [
+        {
+          "id": 70065,
+          "name": "POLO IV",
+          "latitude": 40.288803, "longitude": -7.515155
+        },
+        {
+          "id": 76,
+          "name": "CAFÉ MILLENIUM",
+          "latitude": 40.28716187186816, "longitude": -7.512446873219082
+        },
+        {
+          "id": 70071,
+          "name": "MODATEX",
+          "latitude": 40.285237, "longitude":-7.508850
+        },
+        {
+          "id": 70069,
+          "name": "BOMBEIROS",
+          "latitude": 40.283423726817034, "longitude": -7.506147225407347
+        },
+        {
+          "id": 70054,
+          "name": "RUA GREGÓRIO GERALDES",
+          "latitude": 40.281998, "longitude": -7.506777
+        },
+        {
+          "id": 70204,
+          "name": "PRAÇA DO MUNICIPIO",
+          "latitude": 40.280518, "longitude": -7.504172
+        },
+        {
+          "id": 70023,
+          "name": "SHOPPING SPORTING I",
+          "latitude": 40.280192, "longitude": -7.502764
+        },
+        {
+          "id": 8,
+          "name": "GARAGEM SÃO JOÃO LATERAL",
+          "latitude": 40.282145, "longitude": -7.502117
+        },
+        {
+          "id": 9,
+          "name": "ELEVADOR DO JARDIM",
+          "latitude": 40.284443, "longitude": -7.503099
+        },
+        {
+          "id": 70043,
+          "name": "PONTE DA CARPINTEIRA",
+          "latitude" :40.2846943, "longitude": -7.5030301
+        },
+        {
+          "id": 118,
+          "name": "GRUPO RODRIGO",
+          "latitude": 40.28358228920115, "longitude": -7.499605292253323
+        },
+        {
+          "id": 119,
+          "name": "ESC. RODRIGO",
+          "latitude": 40.281126, "longitude": -7.498951
+        },
+        {
+          "id": 120,
+          "name": "RUA MATHEUS FERNANDES",
+          "latitude": 40.279399, "longitude": -7.498284
+        },
+        {
+          "id": 68,
+          "name": "TRIBUNAL",
+          "latitude": 40.277209, "longitude": -7.498538
+        },
+        {
+          "id": 70049,
+          "name": "ESC. FREI HEITOR PINTO",
+          "latitude": 40.276990, "longitude": -7.500168
+
+        },
+        {
+          "id": 27,
+          "name": "BIBILOTECA MUNICIPAL",
+          "latitude": 40.27543622768973, "longitude":-7.498675440417431
+        },
+        {
+          "id": 121,
+          "name": "TERMINAL RODOVIÁRIO",
+          "latitude": 40.2738376082665, "longitude": -7.498798171696929
+        },
+        {
+          "id": 70125,
+          "name": "SERRA SHOPPING",
+          "latitude": 40.271610, "longitude": -7.500873
+        },
+        {
+          "id": 123,
+          "name": "BAIXO SERRA SHOPPING",
+          "latitude": 40.270154812818035, "longitude": -7.500176763539816
+        },
+        {
+          "id": 124,
+          "name": "RUA CENTRO DAS ARTES",
+          "latitude": 40.270847, "longitude":-7.498301
+        },
+        {
+          "id": 70010,
+          "name": "INTERMARCHÉ",
+          "latitude": 40.270795, "longitude": -7.493582
+        },
+        {
+          "id": 126,
+          "name": "UBI POLO III",
+          "latitude":40.268685, "longitude": -7.494487
+        },
+        {
+          "id": 49,
+          "name": "HOTEL PURA LÃ",
+          "latitude": 40.267356, "longitude":-7.496755
+        },
+        {
+          "id": 127,
+          "name": "ALAMÊDA PÊRO DA COVILHÃ",
+          "latitude": 40.266160, "longitude":-7.494587
+        },
+        {
+          "id": 11,
+          "name": "GALP",
+          "latitude": 40.264990, "longitude":-7.491241
+        }
+      ]
+    }
+
+  ]
+}

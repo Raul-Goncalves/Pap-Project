@@ -1,0 +1,221 @@
+{
+  "rota": [
+    {
+      "line": 11,
+      "name": "UNIVERSIDADE",
+      "description": "VOLTA",
+      "stops": [
+        {
+          "id": 12,
+          "name": "TERMINAL RODOVIÁRIO",
+          "latitude": 40.273752, "longitude": -7.497757
+        },
+        {
+          "id": 177,
+          "name": "ESTAÇÃO CP(PROVISÓRIO)",
+          "latitude": 40.277823, "longitude": -7.496752
+        },
+        {
+          "id": 68,
+          "name": "TRIBUNAL I",
+          "latitude": 40.277209, "longitude": -7.498538
+        },
+        {
+          "id": 89672,
+          "name": "ESC. FREI/CAMPOS",
+          "latitude": 40.278592, "longitude": -7.500973
+        },
+        {
+          "id": 7,
+          "name": "AV. 25 DE ABRIL",
+          "latitude": 40.279718, "longitude": -7.501460
+        },
+        {
+          "id": 6,
+          "name": "GARAGEM DE SÃO JOÃO III",
+          "latitude": 40.281724, "longitude": -7.501338
+        },
+        {
+          "id": 70002,
+          "name": "SHOPPING SPORTING II",
+          "latitude": 40.280290, "longitude": -7.502572
+        },
+        {
+          "id": 70024,
+          "name": "PRAÇA DO MUNICIPIO",
+          "latitude": 40.280518, "longitude": -7.504172
+        },
+        {
+          "id": 70054,
+          "name": "RUA GREGÓRIO GERALDES II",
+          "latitude": 40.281996, "longitude": -7.506958
+        },
+        {
+          "id": 70055,
+          "name": "SANTA CASA DA MISERICÓRDIA",
+          "latitude": 40.282138, "longitude": -7.508671
+        },
+        {
+          "id": 130,
+          "name": "CEMITÉRIO",
+          "latitude": 40.283390, "longitude": -7.509698
+        },
+        {
+          "id": 70063,
+          "name": "GRUPO CAMPOS MELO",
+          "latitude": 40.28466, "longitude": -7.51198
+        },
+        {
+          "id": 70064,
+          "name": "RUA JOSÉ CAETANO JR.",
+          "latitude": 40.286406, "longitude": -7.513869
+        },
+        {
+          "id": 70065,
+          "name": "UBI POLO IV",
+          "latitude": 40.288801, "longitude": -7.515149
+        },
+        {
+          "id": 76,
+          "name": "CAFÉ MILLENIUM",
+          "latitude": 40.28716187186816, "longitude": -7.512446873219082
+        },
+        {
+          "id": 70071,
+          "name": "MODATEX",
+          "latitude": 40.285237, "longitude":-7.508850
+        },
+        {
+          "id": 70069,
+          "name": "BOMBEIROS",
+          "latitude": 40.283423726817034, "longitude": -7.506147225407347
+        },
+        {
+          "id": 70054,
+          "name": "RUA GREGÓRIO GERALDES I",
+          "latitude": 40.281998, "longitude": -7.506777
+        },
+        {
+          "id": 70024,
+          "name": "PRAÇA DO MUNICIPIO",
+          "latitude": 40.280518, "longitude": -7.504172
+        },
+        {
+          "id": 70024,
+          "name": "SHOPPING SPORTING I",
+          "latitude": 40.280192, "longitude": -7.502764
+        },
+        {
+          "id": 70003,
+          "name": "COLÉGIO DAS FREIRAS",
+          "latitude": 40.278414, "longitude": -7.503666
+        },
+        {
+          "id": 70005,
+          "name": "UBI",
+          "latitude": 40.277928, "longitude": -7.508557
+        },
+        {
+          "id": 70117,
+          "name": "UBI - ACÇÃO SOCIAL",
+          "latitude": 40.273718, "longitude": -7.507414
+        },
+        {
+          "id": 70118,
+          "name": "R. DE SANTO ANTÓNIO",
+          "latitude": 40.271801, "longitude": -7.509942
+        },
+        {
+          "id": 70119,
+          "name": "TRAVESSA DE SANTO ANTÓNIO",
+          "latitude": 40.270412, "longitude": -7.511739
+        },
+        {
+          "id": 70120,
+          "name": "LARGO DE SANTO ANTÓNIO",
+          "latitude": 40.268392, "longitude": -7.513595
+        },
+        {
+          "id": 70207,
+          "name": "RUA DO COMÉRCIO",
+          "latitude": 40.266946, "longitude": -7.515857
+        },
+        {
+          "id": 70122,
+          "name": "TRAVESSA DA AMOREIRA",
+          "latitude": 40.267160, "longitude": -7.512049
+        },
+        {
+          "id": 70122,
+          "name": "RUA DA AMOREIRA",
+          "latitude": 40.267313, "longitude": -7.510402
+        },
+        {
+          "id": 70123,
+          "name": "REFÚGIO",
+          "latitude": 40.266217, "longitude": -7.506976
+        },
+        {
+          "id": 70211,
+          "name": "QUINTA DO SOL",
+          "latitude": 40.264487, "longitude": -7.506858
+        },
+        {
+          "id": 70212,
+          "name": "GP. RECREATIVO REFÚGIO",
+          "latitude": 40.262598, "longitude": -7.506362
+        },
+        {
+          "id": 23,
+          "name": "TCT REFÚGIO",
+          "latitude": 40.262288, "longitude": -7.505080
+        },
+        {
+          "id": 23,
+          "name": "ROTUNDA DOS CALDEIRÓES",
+          "latitude": 40.264835, "longitude": -7.503542
+        },
+        {
+          "id": 89678,
+          "name": "REPSOL",
+          "latitude": 40.280192, "longitude": -7.502764
+        },
+        {
+          "id": 70156,
+          "name": "UBI - POLO III",
+          "latitude": 40.268599, "longitude": -7.494054
+        },
+        {
+          "id": 70011,
+          "name": "INTERMACHÉ II",
+          "latitude": 40.270840, "longitude": -7.494113
+        },
+        {
+          "id": 70012,
+          "name": "AV. DO ANIL",
+          "latitude": 40.272428, "longitude": -7.497750
+        },
+        {
+          "id": 70171,
+          "name": "BAIRRO DAS ARTES I",
+          "latitude": 40.272421, "longitude": -7.498810
+        },
+        {
+          "id": 70172,
+          "name": "BAIRRO DAS ARTES II",
+          "latitude": 40.270297, "longitude": -7.500630
+        },
+        {
+          "id": 70175,
+          "name": "SERRA SHOPPING",
+          "latitude": 40.270438, "longitude": -7.501603
+        },
+        {
+          "id": 12,
+          "name": "TERMINAL RODOVIÁRIO",
+          "latitude": 40.273752, "longitude": -7.497757
+        }
+      ]
+    }
+  ]
+}

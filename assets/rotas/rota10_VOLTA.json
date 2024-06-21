@@ -1,0 +1,160 @@
+{
+  "rota": [
+    {
+      "line": 10,
+      "name": "BIQUINHA - TERMINAL",
+      "description": "IDA",
+      "stops": [
+        {
+          "id": 51,
+          "name": "BAIRRO BIQUINHA TERMINAL",
+          "latitude": 40.283805, "longitude": -7.516175
+        },
+        {
+          "id": 70060,
+          "name": "BAIRRO BIQUINHA II",
+          "latitude": 40.283914, "longitude": -7.513685
+        },
+        {
+          "id": 70061,
+          "name": "ESTÁDIO MUNICIPAL",
+          "latitude": 40.283237, "longitude": -7.512820
+        },
+        {
+          "id": 156,
+          "name": "GRUPO MATA I",
+          "latitude": 40.28161, "longitude": -7.51264
+        },
+        {
+          "id": 70057,
+          "name": "R. MONTES HEMINIOS I",
+          "latitude": 40.28113, "longitude": -7.51236
+        },
+        {
+          "id": 158,
+          "name": "R. MONTES HEMINIOS II",
+          "latitude": 40.28099, "longitude": -7.51047
+        },
+        {
+          "id": 13,
+          "name": "SANTA CASA DA MISERICÓDIA II",
+          "latitude": 40.282003, "longitude": -7.508633
+        },
+        {
+          "id": 70054,
+          "name": "RUA GREGÓRIO GERALDES III",
+          "latitude": 40.281964, "longitude": -7.507161
+        },
+        {
+          "id": 70024,
+          "name": "PRAÇA DO MUNICIPIO",
+          "latitude": 40.280518, "longitude": -7.504172
+        },
+        {
+          "id": 70024,
+          "name": "SHOPPING SPORTING I",
+          "latitude": 40.280192, "longitude": -7.502764
+        },
+        {
+          "id": 70003,
+          "name": "COLÉGIO DAS FREIRAS",
+          "latitude": 40.278414, "longitude": -7.503666
+        },
+        {
+          "id": 70005,
+          "name": "UBI",
+          "latitude": 40.277928, "longitude": -7.508557
+        },
+        {
+          "id": 70006,
+          "name": "AV. DA UNIVERSIDADE",
+          "latitude": 40.274387, "longitude": -7.503458
+        },
+        {
+          "id": 70007,
+          "name": "FINANÇAS ANTIGAS",
+          "latitude": 40.274593, "longitude": -7.502149
+        },
+        {
+          "id": 70008,
+          "name": "ESC. PALMEIRAS",
+          "latitude": 40.273767, "longitude": -7.500475
+        },
+        {
+          "id": 122,
+          "name": "TERMINAL RODOVIÁRIO II",
+          "latitude": 40.273927, "longitude": -7.498402
+        },
+        {
+          "id": 70178,
+          "name": "INATEL I",
+          "latitude": 40.278956, "longitude": -7.495785
+        },
+        {
+          "id": 70189,
+          "name": "ESPAÇO DAS IDADES",
+          "latitude": 40.278300, "longitude": -7.494198
+        },
+        {
+          "id": 70180,
+          "name": "GNR COVILHÃ",
+          "latitude": 40.27874, "longitude": -7.49142
+        },
+        {
+          "id": 70181,
+          "name": "QUINTA ROSA",
+          "latitude": 40.280259, "longitude": -7.488816
+        },
+        {
+          "id": 173,
+          "name": "QTA. ROSA",
+          "latitude": 40.281148, "longitude": -7.491331
+        },
+        {
+          "id": 174,
+          "name": "CIVETE",
+          "latitude": 40.280106, "longitude": -7.493148
+        },
+        {
+          "id": 50,
+          "name": "INATEL II",
+          "latitude": 40.27901, "longitude": -7.49587
+        },
+        {
+          "id": 50,
+          "name": "INATEL II",
+          "latitude": 40.27901, "longitude": -7.49587
+        },
+        {
+          "id": 70016,
+          "name": "BIBILOTECA MUNICIPAL II",
+          "latitude": 40.27553, "longitude": -7.498844
+        },
+        {
+          "id": 70016,
+          "name": "R. CIDADE DO FUNDÃO",
+          "latitude": 40.277657, "longitude": -7.501322
+        },
+        {
+          "id": 7,
+          "name": "AV. 25 DE ABRIL",
+          "latitude": 40.279718, "longitude": -7.501460
+        },
+        {
+          "id": 6,
+          "name": "GARAGEM DE SÃO JOÃO III",
+          "latitude": 40.281724, "longitude": -7.501338
+        },{
+          "id": 70002,
+          "name": "SHOPPING SPORTING II",
+          "latitude": 40.280290, "longitude": -7.502572
+        },
+        {
+          "id": 70024,
+          "name": "PRAÇA DO MUNICIPIO",
+          "latitude": 40.280518, "longitude": -7.504172
+        }
+      ]
+    }
+  ]
+}
