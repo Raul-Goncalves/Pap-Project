@@ -96,12 +96,6 @@ class _routeScreenState extends State<routeScreen> {
           _buildRouteContainer(context, "N12", "Biquinha - C.Saúde", () {
             Navigator.push(context, MaterialPageRoute(builder: (context) => n11Screen()));
           }),
-          _buildRouteContainer(context, "N27", "Hospital - Teixoso", () {
-            Navigator.push(context, MaterialPageRoute(builder: (context) => n11Screen()));
-          }),
-          _buildRouteContainer(context, "N20", "Covelo - Pouso", () {
-            Navigator.push(context, MaterialPageRoute(builder: (context) => n11Screen()));
-          }),
         ],
       ),
     );

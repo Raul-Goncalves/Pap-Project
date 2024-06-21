@@ -18,9 +18,9 @@ class _n11Screen extends State<n11Screen> {
 
   Future<void> _loadStops() async {
     try {
-      String data = await rootBundle.loadString('assets/routes.json');
+      String data = await rootBundle.loadString('assets/rotas/rota11_IDA.json');
       final jsonResult = json.decode(data);
-      List<dynamic> routes = jsonResult['routes'];
+      List<dynamic> routes = jsonResult['rota'];
 
       if (routes != null && routes.isNotEmpty) {
         setState(() {
@@ -69,8 +69,8 @@ class _n11Screen extends State<n11Screen> {
             var stop = stops[index];
             String id = stop['id'].toString();
             String name = stop['name'] ?? 'Nome não disponível';
-            String latitude = stop['latitude'].toString();
-            String longitude = stop['longitude'].toString();
+            double latitude = double.parse(stop['latitude'].toString());
+            double longitude = double.parse(stop['longitude'].toString());
 
             return Container(
               margin: EdgeInsets.symmetric(vertical: 5.0),
@@ -91,7 +91,14 @@ class _n11Screen extends State<n11Screen> {
                   IconButton(
                     icon: Icon(Icons.location_on, color: Colors.indigo.shade900),
                     onPressed: () {
-                      print('Latitude: $latitude, Longitude: $longitude');
+                      Navigator.pushNamed(
+                        context,
+                        '/homeScreen',
+                        arguments: {
+                          'latitude': latitude,
+                          'longitude': longitude
+                        },
+                      );
                     },
                   ),
                 ],

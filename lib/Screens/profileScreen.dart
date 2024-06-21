@@ -5,6 +5,10 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:papproject/Screens/homeScreen.dart';
+import 'package:papproject/Screens/routesScreen.dart';
+
+import 'aboutScreen.dart';
+import 'busScreen.dart';
 
 class profileScreen extends StatefulWidget {
   const profileScreen({super.key});
@@ -34,7 +38,9 @@ class _profileScreenState extends State<profileScreen> {
           .get();
       final data = userDoc.data() as Map<String, dynamic>?;
       setState(() {
-        _imageURL = data != null && data.containsKey('imageUrl') ? data['imageUrl'] : null;
+        _imageURL = data != null && data.containsKey('imageUrl')
+            ? data['imageUrl']
+            : null;
       });
     }
   }
@@ -66,12 +72,16 @@ class _profileScreenState extends State<profileScreen> {
   Future<void> _uploadImage() async {
     User? user = _auth.currentUser;
     if (user != null && _imageFile != null) {
-      Reference storageReference = FirebaseStorage.instance.ref().child('user_profiles/${user.uid}');
+      Reference storageReference =
+          FirebaseStorage.instance.ref().child('user_profiles/${user.uid}');
       try {
         UploadTask uploadTask = storageReference.putFile(_imageFile!);
         TaskSnapshot snapshot = await uploadTask;
         String fileURL = await snapshot.ref.getDownloadURL();
-        await FirebaseFirestore.instance.collection('user').doc(user.uid).update({
+        await FirebaseFirestore.instance
+            .collection('user')
+            .doc(user.uid)
+            .update({
           'imageUrl': fileURL,
         });
         setState(() {
@@ -84,7 +94,6 @@ class _profileScreenState extends State<profileScreen> {
       }
     }
   }
-
 
   @override
   void initState() {
@@ -175,7 +184,7 @@ class _profileScreenState extends State<profileScreen> {
                     }
                   },
                 ),
-                SizedBox(height: 1),
+                SizedBox(height: 10),
                 Container(
                   width: 375,
                   child: GridView.count(
@@ -184,104 +193,42 @@ class _profileScreenState extends State<profileScreen> {
                     mainAxisSpacing: 10,
                     crossAxisSpacing: 10,
                     children: <Widget>[
-                      Container(
-                        decoration: BoxDecoration(
-                          color: Colors.white.withOpacity(0.8),
-                          borderRadius: BorderRadius.circular(15.0),
-                        ),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            IconButton(
-                              icon: Icon(Icons.access_time,
-                                  color: Colors.indigo.shade900, size: 50),
-                              onPressed: null,
-                            ),
-                            SizedBox(height: 5),
-                            Text(
-                              "Hórario",
-                              style: TextStyle(
-                                color: Colors.indigo.shade900,
-                                fontSize: 20,
-                              ),
-                              textAlign: TextAlign.center,
-                            )
-                          ],
+                      _buildGridItem(
+                        context,
+                        icon: Icons.map,
+                        label: "Mapa",
+                        onPressed: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => homeScreen()),
                         ),
                       ),
-                      Container(
-                        decoration: BoxDecoration(
-                          color: Colors.white.withOpacity(0.8),
-                          borderRadius: BorderRadius.circular(15.0),
-                        ),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            IconButton(
-                              icon: Icon(Icons.location_on,
-                                  color: Colors.indigo.shade900, size: 50),
-                              onPressed: null,
-                            ),
-                            SizedBox(height: 5),
-                            Text(
-                              "Paragens",
-                              style: TextStyle(
-                                color: Colors.indigo.shade900,
-                                fontSize: 20,
-                              ),
-                              textAlign: TextAlign.center,
-                            )
-                          ],
+                      _buildGridItem(
+                        context,
+                        icon: Icons.location_on,
+                        label: "Rota",
+                        onPressed: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => routeScreen()),
                         ),
                       ),
-                      Container(
-                        decoration: BoxDecoration(
-                          color: Colors.white.withOpacity(0.8),
-                          borderRadius: BorderRadius.circular(15.0),
-                        ),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            IconButton(
-                              icon: Icon(Icons.directions_bus,
-                                  color: Colors.indigo.shade900, size: 50),
-                              onPressed: null,
-                            ),
-                            SizedBox(height: 5),
-                            Text(
-                              "Ônibus",
-                              style: TextStyle(
-                                color: Colors.indigo.shade900,
-                                fontSize: 20,
-                              ),
-                              textAlign: TextAlign.center,
-                            )
-                          ],
+                      _buildGridItem(
+                        context,
+                        icon: Icons.directions_bus,
+                        label: "Ônibus",
+                        onPressed: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => busScreen()),
                         ),
                       ),
-                      Container(
-                        decoration: BoxDecoration(
-                          color: Colors.white.withOpacity(0.8),
-                          borderRadius: BorderRadius.circular(15.0),
-                        ),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            IconButton(
-                              icon: Icon(Icons.question_mark,
-                                  color: Colors.indigo.shade900, size: 50),
-                              onPressed: null,
-                            ),
-                            SizedBox(height: 5),
-                            Text(
-                              "Duvida",
-                              style: TextStyle(
-                                color: Colors.indigo.shade900,
-                                fontSize: 20,
-                              ),
-                              textAlign: TextAlign.center,
-                            )
-                          ],
+                      _buildGridItem(
+                        context,
+                        icon: Icons.question_mark,
+                        label: "Duvida",
+                        onPressed: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => aboutScreen()),
                         ),
                       ),
                     ],
@@ -289,6 +236,38 @@ class _profileScreenState extends State<profileScreen> {
                 ),
               ],
             ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildGridItem(
+    BuildContext context, {
+    required IconData icon,
+    required String label,
+    required VoidCallback onPressed,
+  }) {
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.white.withOpacity(0.8),
+        borderRadius: BorderRadius.circular(15.0),
+      ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          IconButton(
+            icon: Icon(icon, color: Colors.indigo.shade900, size: 50),
+            onPressed: onPressed,
+          ),
+          SizedBox(height: 5),
+          Text(
+            label,
+            style: TextStyle(
+              color: Colors.indigo.shade900,
+              fontSize: 20,
+            ),
+            textAlign: TextAlign.center,
           ),
         ],
       ),
@@ -321,3 +300,4 @@ class _profileScreenState extends State<profileScreen> {
     );
   }
 }
+
