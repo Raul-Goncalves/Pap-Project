@@ -1,7 +1,5 @@
 import 'dart:convert';
-import 'dart:ffi';
 import 'dart:io';
-import 'dart:ui';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -12,9 +10,10 @@ import 'package:image_picker/image_picker.dart';
 import 'package:papproject/Screens/busScreen.dart';
 import 'package:papproject/Screens/profileScreen.dart';
 import 'package:papproject/Screens/routesScreen.dart';
+import 'package:papproject/widgets/show_popup.dart';
 import '../FireBase/direction_service.dart';
 import '../widgets/toast.dart';
-import 'loginScreen.dart';
+import 'authection/loginScreen.dart';
 
 class homeScreen extends StatefulWidget {
   const homeScreen({super.key});
@@ -25,7 +24,11 @@ class homeScreen extends StatefulWidget {
 
 class _homeScreenState extends State<homeScreen> {
 
-  List<Marker> markers = [];
+  dynamic selectedStop;
+  bool showPopup = false;
+
+  Set<Marker> markers =  {};
+  BitmapDescriptor? _customIcon;
 
   final LatLng _center = const LatLng(40.2826, -7.50326); // Covilhã
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -34,11 +37,12 @@ class _homeScreenState extends State<homeScreen> {
   File? _imageFile;
   String? _imageURL;
   GoogleMapController? _mapController;
+  LatLng? _tagetLocation;
 
   int _selectButton = 0;
   bool _MarkersVisile = false;
 
-  final DirectionService _directionService = DirectionService(apiKey: 'MINHA KEY');
+  final DirectionService _directionService = DirectionService(apiKey: 'MY KEY');
 
   Future<void> _loadMapStyle() async {
     String style = await rootBundle.loadString('assets/map_style.json');
@@ -48,6 +52,7 @@ class _homeScreenState extends State<homeScreen> {
   void _onMapCreated(GoogleMapController controller) {
     _mapController = controller;
     _loadMapStyle();
+    _moveCamToLocation();
   }
 
   Future<void> _pickImage() async {
@@ -124,19 +129,27 @@ class _homeScreenState extends State<homeScreen> {
     });
   }
 
+  Future<void> _loadCustomIcon() async {
+    final ImageConfiguration imageConfiguration = ImageConfiguration(size: Size(48, 48));
+    try {
+      _customIcon = await BitmapDescriptor.fromAssetImage(imageConfiguration, 'assets/icone100x100.png');
+    } catch (e) {
+      print('Erro ao carregar ícone personalizado: $e');
+      _customIcon = BitmapDescriptor.defaultMarker; // Use um marcador padrão em caso de erro
+    }
+  }
+
   Future<void> _loadStops() async {
     try {
-      String data = await rootBundle.loadString('assets/routes.json');
+      String data = await rootBundle.loadString('assets/rotas/all_stops_bus.json');
       final jsonResult = json.decode(data);
 
-      if (jsonResult.containsKey('routes') && jsonResult['routes'] is List) {
-        List<dynamic> routes = jsonResult['routes'];
+      if (jsonResult.containsKey('rota') && jsonResult['rota'] is List) {
+        List<dynamic> routes = jsonResult['rota'];
 
         var line11Route = routes.firstWhere((route) => route['line'] == 11, orElse: () => null);
         if (line11Route != null && line11Route.containsKey('stops') && line11Route['stops'] is List) {
           List<dynamic> stops = line11Route['stops'];
-
-          double desiredIconSize = 32.0;
 
           setState(() {
             markers.clear();
@@ -145,23 +158,27 @@ class _homeScreenState extends State<homeScreen> {
               double lng = stop['longitude'];
               String name = stop['name'];
 
+              BitmapDescriptor? markerIcon = _customIcon;
+              markerIcon ??= BitmapDescriptor.defaultMarker;
+
               markers.add(
                 Marker(
                   markerId: MarkerId(name),
                   position: LatLng(lat, lng),
                   infoWindow: InfoWindow(title: name),
-                  icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueCyan),
-                    onTap: () {
-                    // Ao clicar no marcador, pode-se implementar a navegação para outra tela ou ação desejada
-                    print('Clicou no marcador: $name');
-                    // Exemplo: navegação para outra tela passando lat e lng
+                  icon: markerIcon,
+                  onTap: () {
+                    setState(() {
+                      selectedStop = stop; // Atualiza a paragem selecionada
+                      showPopup = true; // Exibe o popup
+                    });
                   },
                 ),
               );
             }
           });
         } else {
-          print('Nenhuma lista de paradas encontrada na rota com line: 11.');
+          print('Nenhuma lista de paradas encontrada na rota com line.');
         }
       } else {
         print('Nenhuma rota encontrada no JSON.');
@@ -171,12 +188,54 @@ class _homeScreenState extends State<homeScreen> {
     }
   }
 
+  void _moveCamToLocation(){
+    if(_tagetLocation != null){
+      setState(() {
+        markers.clear();
+        markers.add(
+          Marker(
+              markerId: MarkerId('target'),
+              position: _tagetLocation!,
+              icon: _customIcon ?? BitmapDescriptor.defaultMarker,
+          ),
+        );
+      });
+      _mapController?.animateCamera(CameraUpdate.newLatLngZoom(_tagetLocation!, 17),
+      );
+    }
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final args = ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>?;
+    if(args != null){
+      final double latitude = args['latitude'] as double;
+      final double longitude = args['longitude'] as double;
+      _tagetLocation = LatLng(latitude, longitude);
+      _moveCamToLocation();
+
+    }
+  }
+
+  void updateSelectedStop(dynamic stop) {
+    setState(() {
+      selectedStop = stop;
+    });
+  }
+
+  void _togglePopup() {
+    setState(() {
+      showPopup = !showPopup;
+    });
+  }
 
   @override
   void initState() {
     super.initState();
     _loadMapStyle();
     _loadUserProfile();
+    _loadCustomIcon();
   }
 
   @override
@@ -211,18 +270,29 @@ class _homeScreenState extends State<homeScreen> {
           ),
         ),
       ),
-      body: Stack(
-        children: [
-          GoogleMap(
-            onMapCreated: _onMapCreated,
-            initialCameraPosition: CameraPosition(
-              target: _center,
-              zoom: 14,
+        body: Stack(
+          children: [
+            GoogleMap(
+              onMapCreated: _onMapCreated,
+              initialCameraPosition: CameraPosition(
+                target: _center,
+                zoom: 14,
+              ),
+              markers: Set<Marker>.from(markers),
+              onTap: (LatLng latLng) {
+                setState(() {
+                  showPopup = false;
+                });
+              },
             ),
-            markers: Set<Marker>.from(markers),
-          ),
-        ],
-      ),
+            // Popup
+            if (showPopup && selectedStop != null)
+              ShowPopup(
+                selectedStop: selectedStop,
+                onClose: _togglePopup,
+              ),
+          ],
+        ),
       bottomNavigationBar: BottomNavigationBar(
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.location_on), label: "Paragens"),

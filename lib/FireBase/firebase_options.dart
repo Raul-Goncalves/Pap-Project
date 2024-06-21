@@ -51,7 +51,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'MY KEY',
-    appId: 'MY ID',
+    appId: 'MY KEY',
     messagingSenderId: '26754533117',
     projectId: 'papproject-424716',
     storageBucket: 'papproject-424716.appspot.com',
@@ -59,7 +59,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'MY KEY',
-    appId: 'MY ID',
+    appId: 'MY KEY',
     messagingSenderId: '26754533117',
     projectId: 'papproject-424716',
     storageBucket: 'papproject-424716.appspot.com',
