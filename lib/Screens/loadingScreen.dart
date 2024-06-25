@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:papproject/Screens/homeScreen.dart';
+import 'package:papproject/Screens/teste.dart';
 
 class loadingScreen extends StatefulWidget {
   const loadingScreen({super.key});
