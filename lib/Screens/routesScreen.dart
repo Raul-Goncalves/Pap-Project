@@ -33,6 +33,33 @@ class _routeScreenState extends State<routeScreen> {
     );
   }
 
+  Future<void> _loadStopsFromJson(BuildContext context, String jsonPath) async {
+    try {
+      String data = await rootBundle.loadString(jsonPath);
+      final jsonResult = json.decode(data);
+
+      if (jsonResult.containsKey('rota') && jsonResult['rota'] is List) {
+        List<dynamic> routes = jsonResult['rota'];
+        if (routes.isNotEmpty && routes[0].containsKey('stops') && routes[0]['stops'] is List) {
+          List<dynamic> stops = routes[0]['stops'];
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => homeScreen(stops: stops),
+            ),
+          );
+        } else {
+          throw Exception('Formato de JSON inesperado');
+        }
+      } else {
+        throw Exception('Formato de JSON inesperado');
+      }
+    } catch (e) {
+      print('Erro ao carregar paragens: $e');
+    }
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -85,16 +112,16 @@ class _routeScreenState extends State<routeScreen> {
         crossAxisCount: 2,
         children: [
           _buildRouteContainer(context, "UBI", "Universidade", () {
-            _loadStopsFromJson(context, "assets/routes.json");
+            _loadStopsFromJson(context, "assets/rotas/rotaUBI_IDA.json");
           }),
           _buildRouteContainer(context, "N10", "Biquinha - Terminal", () {
-            Navigator.push(context, MaterialPageRoute(builder: (context) => n11Screen()));
+            _loadStopsFromJson(context, "assets/rotas/rota10_IDA.json");
           }),
           _buildRouteContainer(context, "N11", "PoloIV - Hospital", () {
-            Navigator.push(context, MaterialPageRoute(builder: (context) => n11Screen()));
+            _loadStopsFromJson(context, "assets/rotas/rota11_IDA.json");
           }),
           _buildRouteContainer(context, "N12", "Biquinha - C.Saúde", () {
-            Navigator.push(context, MaterialPageRoute(builder: (context) => n11Screen()));
+            _loadStopsFromJson(context, "assets/rotas/rota12_IDA.json");
           }),
         ],
       ),
@@ -132,20 +159,5 @@ class _routeScreenState extends State<routeScreen> {
         ),
       ),
     );
-  }
-  Future<void> _loadStopsFromJson(BuildContext context, String jsonPath) async {
-    try {
-      String data = await DefaultAssetBundle.of(context).loadString(jsonPath);
-      List<dynamic> stops = json.decode(data);
-
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => homeScreen(),
-        ),
-      );
-    } catch (e) {
-      print('Erro ao carregar paragens: $e');
-    }
   }
 }
