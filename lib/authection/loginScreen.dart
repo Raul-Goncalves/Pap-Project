@@ -1,51 +1,41 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:papproject/Screens/authection/loginScreen.dart';
+import 'package:papproject/authection/registerScreen.dart';
+import 'package:papproject/authection/resPasswordScreen.dart';
+import 'package:papproject/widgets/toast.dart';
 
-import '../../widgets/toast.dart';
-import '../homeScreen.dart';
+import '../Screens/homeScreen.dart';
 
-class registerScreen extends StatefulWidget {
-  const registerScreen({super.key});
+class loginScreen extends StatefulWidget {
+  const loginScreen({super.key});
 
   @override
-  State<registerScreen> createState() => _registerScreenState();
+  State<loginScreen> createState() => _loginScreenState();
 }
 
-class _registerScreenState extends State<registerScreen> {
+class _loginScreenState extends State<loginScreen> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
-  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
-  final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-
   final GlobalKey<FormState> _globalKey = GlobalKey<FormState>();
 
-  String _error = '';
+  String _error = 'ALGO DEU ERRADO!: ';
   bool _isSigningUp = false;
 
-  void _register() async {
+  void _login() async {
     if (_globalKey.currentState!.validate()) {
       setState(() {
         _isSigningUp = true;
       });
 
       try {
-        UserCredential userCredential = await _auth.createUserWithEmailAndPassword(
-            email: _emailController.text, password: _passwordController.text);
-
-        User? user = userCredential.user;
-
-        if (user != null) {
-          await _firestore.collection('user').doc(user.uid).set({
-            'name': _usernameController.text,
-            'email': _emailController.text,
-          });
-          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => homeScreen()));
-          showToast(message: "Usuário registrado com sucesso ${_usernameController.text}");
-        }
+        UserCredential userCredential = await _auth.signInWithEmailAndPassword(
+            email: _emailController.text,
+            password: _passwordController.text);
+        showToast(message: 'Seja bem-vindo ${userCredential.user?.email}');
+        Navigator.pushReplacement(
+            context, MaterialPageRoute(builder: (context) => homeScreen()));
       } catch (e) {
         setState(() {
           _error = e.toString();
@@ -61,6 +51,16 @@ class _registerScreenState extends State<registerScreen> {
     }
   }
 
+  void _navigatorToRegister() {
+    Navigator.pushReplacement(
+        context, MaterialPageRoute(builder: (context) => registerScreen()));
+  }
+
+  void _navigatorToForgotPassword() {
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => resPasswordScreen()));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -74,7 +74,7 @@ class _registerScreenState extends State<registerScreen> {
           ),
           Center(
             child: Container(
-              padding: EdgeInsets.all(16.0),
+              padding: const EdgeInsets.all(16.0),
               decoration: BoxDecoration(
                 color: Colors.white.withOpacity(0.8),
                 borderRadius: BorderRadius.circular(15.0),
@@ -86,7 +86,7 @@ class _registerScreenState extends State<registerScreen> {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Text(
-                      'Registro',
+                      'Login',
                       style: TextStyle(
                         fontSize: 30,
                         fontWeight: FontWeight.bold,
@@ -103,26 +103,6 @@ class _registerScreenState extends State<registerScreen> {
                     ),
                     const SizedBox(height: 20),
                     TextFormField(
-                      controller: _usernameController,
-                      decoration: InputDecoration(
-                        filled: true,
-                        fillColor: _usernameController.text.isEmpty
-                            ? Colors.white
-                            : Colors.green,
-                        hintText: 'Usuário',
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                      ),
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Por favor, insira seu nome de usuário';
-                        }
-                        return null;
-                      },
-                    ),
-                    const SizedBox(height: 10),
-                    TextFormField(
                       controller: _emailController,
                       decoration: InputDecoration(
                         filled: true,
@@ -137,9 +117,6 @@ class _registerScreenState extends State<registerScreen> {
                       validator: (value) {
                         if (value == null || value.isEmpty) {
                           return 'Por favor, insira seu email';
-                        }
-                        if (!RegExp(r'^[^@]+@[^@]+\.[^@]+').hasMatch(value)) {
-                          return 'Por favor, insira um email válido';
                         }
                         return null;
                       },
@@ -162,22 +139,42 @@ class _registerScreenState extends State<registerScreen> {
                         if (value == null || value.isEmpty) {
                           return 'Por favor, insira sua senha';
                         }
-                        if (value.length < 6) {
-                          return 'A senha deve ter pelo menos 6 caracteres';
-                        }
                         return null;
                       },
                     ),
-                    const SizedBox(height: 50),
+                    const SizedBox(height: 10),
+                    Align(
+                      alignment: Alignment.centerRight,
+                      child: TextButton(
+                        onPressed: () {
+                          _navigatorToForgotPassword();
+                        },
+                        child: Text(
+                          'Esqueceu a senha.',
+                          style: TextStyle(
+                            foreground: Paint()
+                              ..shader = const LinearGradient(
+                                colors: <Color>[
+                                  Color(0xFF000000),
+                                  Color(0xFF4432B0),
+                                  Color(0xFF0000FF),
+                                ],
+                              ).createShader(
+                                  Rect.fromLTWH(0.0, 0.0, 150.0, 70.0)),
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 10),
                     ElevatedButton(
                       onPressed: () {
-                        _isSigningUp ? null : _register();
+                        _login();
                       },
                       style: ElevatedButton.styleFrom(
                         foregroundColor: Colors.blue,
                         backgroundColor: Colors.white,
-                        padding:
-                        const EdgeInsets.symmetric(horizontal: 50, vertical: 10),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 50, vertical: 10),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10),
                         ),
@@ -187,7 +184,7 @@ class _registerScreenState extends State<registerScreen> {
                         color: Colors.blue,
                       )
                           : Text(
-                        'Criar Conta',
+                        'Entrar',
                         style: TextStyle(
                           fontSize: 25,
                           foreground: Paint()
@@ -205,10 +202,10 @@ class _registerScreenState extends State<registerScreen> {
                     const SizedBox(height: 10),
                     TextButton(
                       onPressed: () {
-                        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => loginScreen()));
+                        _navigatorToRegister();
                       },
                       child: Text(
-                        'Já tem uma conta?',
+                        'Ainda não tem conta: Criar agora.',
                         style: TextStyle(
                           foreground: Paint()
                             ..shader = const LinearGradient(
@@ -217,7 +214,8 @@ class _registerScreenState extends State<registerScreen> {
                                 Color(0xFF4432B0),
                                 Color(0xFF0000FF),
                               ],
-                            ).createShader(Rect.fromLTWH(0.0, 0.0, 150.0, 70.0)),
+                            ).createShader(
+                                Rect.fromLTWH(0.0, 0.0, 150.0, 70.0)),
                           fontSize: 16,
                         ),
                       ),
