@@ -40,6 +40,19 @@ class _n11Screen extends State<n11Screen> {
     }
   }
 
+  void _goToHomeScreen(double latitude, double longitude, String stopName) {
+    Navigator.pushNamed(
+      context,
+      '/homeScreen',
+      arguments: {
+        'latitude': latitude,
+        'longitude': longitude,
+        'stopName': stopName,
+      },
+    );
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -91,14 +104,7 @@ class _n11Screen extends State<n11Screen> {
                   IconButton(
                     icon: Icon(Icons.location_on, color: Colors.indigo.shade900),
                     onPressed: () {
-                      Navigator.pushNamed(
-                        context,
-                        '/homeScreen',
-                        arguments: {
-                          'latitude': latitude,
-                          'longitude': longitude
-                        },
-                      );
+                      _goToHomeScreen(latitude, longitude, name);
                     },
                   ),
                 ],

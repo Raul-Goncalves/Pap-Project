@@ -12,11 +12,13 @@ import 'package:papproject/Screens/profileScreen.dart';
 import 'package:papproject/Screens/routesScreen.dart';
 import 'package:papproject/widgets/show_popup.dart';
 import '../FireBase/direction_service.dart';
+import '../authection/loginScreen.dart';
 import '../widgets/toast.dart';
-import 'authection/loginScreen.dart';
 
 class homeScreen extends StatefulWidget {
-  const homeScreen({super.key});
+  final List<dynamic>? stops;
+
+  const homeScreen({Key? key, this.stops}) : super(key: key);
 
   @override
   State<homeScreen> createState() => _homeScreenState();
@@ -28,6 +30,7 @@ class _homeScreenState extends State<homeScreen> {
   bool showPopup = false;
 
   Set<Marker> markers =  {};
+  Set<Polyline> _polylines = {};
   BitmapDescriptor? _customIcon;
 
   final LatLng _center = const LatLng(40.2826, -7.50326); // Covilhã
@@ -53,6 +56,9 @@ class _homeScreenState extends State<homeScreen> {
     _mapController = controller;
     _loadMapStyle();
     _moveCamToLocation();
+    if(widget.stops != null){
+      _addStopsToMap(widget.stops!);
+    }
   }
 
   Future<void> _pickImage() async {
@@ -116,6 +122,7 @@ class _homeScreenState extends State<homeScreen> {
           showToast(message: "Paragens Ativada no Mapa");
         } else {
           markers.clear();
+          _polylines.clear();
           showToast(message: "Paragens Desativadas no Mapa");
         }
       } else {
@@ -135,7 +142,7 @@ class _homeScreenState extends State<homeScreen> {
       _customIcon = await BitmapDescriptor.fromAssetImage(imageConfiguration, 'assets/icone100x100.png');
     } catch (e) {
       print('Erro ao carregar ícone personalizado: $e');
-      _customIcon = BitmapDescriptor.defaultMarker; // Use um marcador padrão em caso de erro
+      _customIcon = BitmapDescriptor.defaultMarker;
     }
   }
 
@@ -147,39 +154,38 @@ class _homeScreenState extends State<homeScreen> {
       if (jsonResult.containsKey('rota') && jsonResult['rota'] is List) {
         List<dynamic> routes = jsonResult['rota'];
 
-        var line11Route = routes.firstWhere((route) => route['line'] == 11, orElse: () => null);
-        if (line11Route != null && line11Route.containsKey('stops') && line11Route['stops'] is List) {
-          List<dynamic> stops = line11Route['stops'];
+        setState(() {
+          markers.clear();
+          for (var route in routes) {
+            if (route.containsKey('stops') && route['stops'] is List) {
+              List<dynamic> stops = route['stops'];
 
-          setState(() {
-            markers.clear();
-            for (var stop in stops) {
-              double lat = stop['latitude'];
-              double lng = stop['longitude'];
-              String name = stop['name'];
+              for (var stop in stops) {
+                double lat = stop['latitude'];
+                double lng = stop['longitude'];
+                String name = stop['name'];
 
-              BitmapDescriptor? markerIcon = _customIcon;
-              markerIcon ??= BitmapDescriptor.defaultMarker;
+                BitmapDescriptor? markerIcon = _customIcon;
+                markerIcon ??= BitmapDescriptor.defaultMarker;
 
-              markers.add(
-                Marker(
-                  markerId: MarkerId(name),
-                  position: LatLng(lat, lng),
-                  infoWindow: InfoWindow(title: name),
-                  icon: markerIcon,
-                  onTap: () {
-                    setState(() {
-                      selectedStop = stop; // Atualiza a paragem selecionada
-                      showPopup = true; // Exibe o popup
-                    });
-                  },
-                ),
-              );
+                markers.add(
+                  Marker(
+                    markerId: MarkerId(name),
+                    position: LatLng(lat, lng),
+                    infoWindow: InfoWindow(title: name),
+                    icon: markerIcon,
+                    onTap: () {
+                      setState(() {
+                        selectedStop = stop;
+                        showPopup = true;
+                      });
+                    },
+                  ),
+                );
+              }
             }
-          });
-        } else {
-          print('Nenhuma lista de paradas encontrada na rota com line.');
-        }
+          }
+        });
       } else {
         print('Nenhuma rota encontrada no JSON.');
       }
@@ -205,6 +211,52 @@ class _homeScreenState extends State<homeScreen> {
     }
   }
 
+  void _addStopsToMap(List<dynamic> stops){
+    setState(() {
+      markers.clear();
+      for(var stop in stops){
+        print('stops data $stop');
+
+        double? lat;
+        double? lng;
+
+        try {
+          lat = stop['latitude'] is String
+              ? double.parse(stop['latitude'])
+              : stop['latitude'] as double;
+          lng = stop['longitude'] is String
+              ? double.parse(stop['longitude'])
+              : stop['longitude'] as double;
+        } catch (e) {
+          print('Erro ao converter latitude/longitude: $e');
+          continue;
+        }
+
+        String name = stop['name'];
+
+
+        BitmapDescriptor? markerIcon = _customIcon;
+        markerIcon ??= BitmapDescriptor.defaultMarker;
+
+        markers.add(
+          Marker(
+            markerId: MarkerId(name),
+            position: LatLng(lat, lng),
+            infoWindow: InfoWindow(title: name),
+            icon: markerIcon,
+            onTap: () {
+              setState(() {
+                selectedStop = stop;
+                showPopup = true;
+              });
+            },
+          ),
+        );
+      }
+    });
+  }
+
+
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
@@ -212,9 +264,17 @@ class _homeScreenState extends State<homeScreen> {
     if(args != null){
       final double latitude = args['latitude'] as double;
       final double longitude = args['longitude'] as double;
+      final String stopName = args['stopName'] as String;
       _tagetLocation = LatLng(latitude, longitude);
       _moveCamToLocation();
-
+      setState(() {
+        selectedStop = {
+          'latitude': latitude,
+          'longitude': longitude,
+          'name': stopName,
+        };
+        showPopup = true;
+      });
     }
   }
 
@@ -279,6 +339,7 @@ class _homeScreenState extends State<homeScreen> {
                 zoom: 14,
               ),
               markers: Set<Marker>.from(markers),
+              polylines: _polylines,
               onTap: (LatLng latLng) {
                 setState(() {
                   showPopup = false;
