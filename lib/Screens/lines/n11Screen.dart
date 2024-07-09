@@ -24,10 +24,10 @@ class _n11Screen extends State<n11Screen> {
 
       if (routes != null && routes.isNotEmpty) {
         setState(() {
-          var line11 = routes.firstWhere((route) => route['line'] == 11,
-              orElse: () => null);
+          var line11 = routes.firstWhere((route) => route['line'] == 11, orElse: () => null);
           if (line11 != null) {
             stops = line11['stops'];
+            stops = stops.where((stop) => stop["name"] != "ponto").toList();
           } else {
             print('Nenhuma linha com ID 11 encontrada.');
           }

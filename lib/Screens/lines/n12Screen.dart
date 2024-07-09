@@ -32,6 +32,7 @@ class _n12ScreenState extends State<n12Screen> {
               orElse: () => null);
           if (line11 != null) {
             stops = line11['stops'];
+            stops = stops.where((stop) => stop["name"] != "ponto").toList();
           } else {
             print('Nenhuma linha com ID 12 encontrada.');
           }

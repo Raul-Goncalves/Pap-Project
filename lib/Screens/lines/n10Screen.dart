@@ -23,7 +23,7 @@ class _n10ScreenState extends State<n10Screen> {
     try {
       String data = await rootBundle.loadString('assets/rotas/rota10_IDA.json');
       final jsonResult = json.decode(data);
-      List<dynamic> routes = jsonResult['rota'];
+      List<dynamic> routes = (jsonResult['rota']);
 
       if (routes != null && routes.isNotEmpty) {
         setState(() {
@@ -31,6 +31,7 @@ class _n10ScreenState extends State<n10Screen> {
               orElse: () => null);
           if (line11 != null) {
             stops = line11['stops'];
+            stops = stops.where((stop) => stop["name"] != "ponto").toList();
           } else {
             print('Nenhuma linha com ID 10 encontrada.');
           }
