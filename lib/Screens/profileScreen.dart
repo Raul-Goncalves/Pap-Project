@@ -32,30 +32,46 @@ class _profileScreenState extends State<profileScreen> {
   Future<void> _loadUserProfile() async {
     User? user = _auth.currentUser;
     if (user != null) {
-      DocumentSnapshot userDoc = await FirebaseFirestore.instance
-          .collection('user')
-          .doc(user.uid)
-          .get();
-      final data = userDoc.data() as Map<String, dynamic>?;
-      setState(() {
-        _imageURL = data != null && data.containsKey('imageUrl')
-            ? data['imageUrl']
-            : null;
-      });
+      try {
+        DocumentSnapshot userDoc = await FirebaseFirestore.instance
+            .collection('user')
+            .doc(user.uid)
+            .get();
+        if (userDoc.exists) {
+          final data = userDoc.data() as Map<String, dynamic>?;
+          setState(() {
+            _imageURL = data != null && data.containsKey('imageUrl')
+                ? data['imageUrl']
+                : null;
+          });
+        } else {
+          print('Documento do usuário não encontrado');
+        }
+      } catch (e) {
+        print('Erro ao carregar perfil do usuário: $e');
+      }
     }
   }
 
   Future<String> _fetchUserName() async {
     User? user = FirebaseAuth.instance.currentUser;
-
     if (user != null) {
-      DocumentSnapshot userDoc = await FirebaseFirestore.instance
-          .collection('user')
-          .doc(user.uid)
-          .get();
-      return userDoc['name'];
+      try {
+        DocumentSnapshot userDoc = await FirebaseFirestore.instance
+            .collection('user')
+            .doc(user.uid)
+            .get();
+        if (userDoc.exists) {
+          final data = userDoc.data() as Map<String, dynamic>;
+          return data['name'];
+        } else {
+          throw Exception('Documento do usuário não encontrado');
+        }
+      } catch (e) {
+        throw Exception('Erro ao buscar nome do usuário: $e');
+      }
     } else {
-      throw Exception('NÃO ESTÁ LOGADO');
+      throw Exception('Usuário não está logado');
     }
   }
 
@@ -73,7 +89,7 @@ class _profileScreenState extends State<profileScreen> {
     User? user = _auth.currentUser;
     if (user != null && _imageFile != null) {
       Reference storageReference =
-          FirebaseStorage.instance.ref().child('user_profiles/${user.uid}');
+      FirebaseStorage.instance.ref().child('user_profiles/${user.uid}');
       try {
         UploadTask uploadTask = storageReference.putFile(_imageFile!);
         TaskSnapshot snapshot = await uploadTask;
