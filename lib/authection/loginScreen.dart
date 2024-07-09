@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:papproject/Screens/adminScreen.dart';
 import 'package:papproject/authection/registerScreen.dart';
 import 'package:papproject/authection/resPasswordScreen.dart';
 import 'package:papproject/widgets/toast.dart';
-
 import '../Screens/homeScreen.dart';
+
 
 class loginScreen extends StatefulWidget {
   const loginScreen({super.key});
@@ -34,8 +35,13 @@ class _loginScreenState extends State<loginScreen> {
             email: _emailController.text,
             password: _passwordController.text);
         showToast(message: 'Seja bem-vindo ${userCredential.user?.email}');
-        Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) => homeScreen()));
+        if(userCredential.user?.email == 'admin@teste.com'){
+          Navigator.pushReplacement(
+              context, MaterialPageRoute(builder: (context) => adminScreen()));
+        }else{
+          Navigator.pushReplacement(
+              context, MaterialPageRoute(builder: (context) => homeScreen()));
+        }
       } catch (e) {
         setState(() {
           _error = e.toString();
