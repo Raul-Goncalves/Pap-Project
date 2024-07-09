@@ -40,6 +40,7 @@ class _routeScreenState extends State<routeScreen> {
 
       if (jsonResult.containsKey('rota') && jsonResult['rota'] is List) {
         List<dynamic> routes = jsonResult['rota'];
+
         if (routes.isNotEmpty && routes[0].containsKey('stops') && routes[0]['stops'] is List) {
           List<dynamic> stops = routes[0]['stops'];
           Navigator.push(

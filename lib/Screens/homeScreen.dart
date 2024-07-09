@@ -10,8 +10,10 @@ import 'package:image_picker/image_picker.dart';
 import 'package:papproject/Screens/busScreen.dart';
 import 'package:papproject/Screens/profileScreen.dart';
 import 'package:papproject/Screens/routesScreen.dart';
+import 'package:papproject/Screens/adminScreen.dart';
+import 'package:papproject/widgets/routeService.dart';
 import 'package:papproject/widgets/show_popup.dart';
-import '../FireBase/direction_service.dart';
+import 'package:http/http.dart' as http;
 import '../authection/loginScreen.dart';
 import '../widgets/toast.dart';
 
@@ -36,6 +38,7 @@ class _homeScreenState extends State<homeScreen> {
   final LatLng _center = const LatLng(40.2826, -7.50326); // Covilhã
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final ImagePicker _picker = ImagePicker();
+  final routeService _routeService = routeService(apiKey: 'MY KEY');
 
   File? _imageFile;
   String? _imageURL;
@@ -45,20 +48,9 @@ class _homeScreenState extends State<homeScreen> {
   int _selectButton = 0;
   bool _MarkersVisile = false;
 
-  final DirectionService _directionService = DirectionService(apiKey: 'MY KEY');
-
   Future<void> _loadMapStyle() async {
     String style = await rootBundle.loadString('assets/map_style.json');
     _mapController?.setMapStyle(style);
-  }
-
-  void _onMapCreated(GoogleMapController controller) {
-    _mapController = controller;
-    _loadMapStyle();
-    _moveCamToLocation();
-    if(widget.stops != null){
-      _addStopsToMap(widget.stops!);
-    }
   }
 
   Future<void> _pickImage() async {
@@ -104,38 +96,6 @@ class _homeScreenState extends State<homeScreen> {
     }
   }
 
-  void _onClickWithButton() {
-    User? user = _auth.currentUser;
-    if (user == null) {
-      Navigator.push(context, MaterialPageRoute(builder: (context) => const loginScreen()));
-    } else {
-      Navigator.push(context, MaterialPageRoute(builder: (context) => const profileScreen()));
-    }
-  }
-
-  void _onItemTapped(int index){
-    setState(() {
-      if (index == 0) {
-        _MarkersVisile = !_MarkersVisile;
-        if (_MarkersVisile) {
-          _loadStops();
-          showToast(message: "Paragens Ativada no Mapa");
-        } else {
-          markers.clear();
-          _polylines.clear();
-          showToast(message: "Paragens Desativadas no Mapa");
-        }
-      } else {
-        _selectButton = index;
-        if (index == 1) {
-          Navigator.push(context, MaterialPageRoute(builder: (context) => routeScreen()));
-        } else if (index == 2) {
-          Navigator.push(context, MaterialPageRoute(builder: (context) => busScreen()));
-        }
-      }
-    });
-  }
-
   Future<void> _loadCustomIcon() async {
     final ImageConfiguration imageConfiguration = ImageConfiguration(size: Size(48, 48));
     try {
@@ -148,8 +108,10 @@ class _homeScreenState extends State<homeScreen> {
 
   Future<void> _loadStops() async {
     try {
-      String data = await rootBundle.loadString('assets/rotas/all_stops_bus.json');
-      final jsonResult = json.decode(data);
+
+      String jsonString = await rootBundle.loadString('assets/rotas/all_stops_bus.json');
+
+      final jsonResult = json.decode(jsonString);
 
       if (jsonResult.containsKey('rota') && jsonResult['rota'] is List) {
         List<dynamic> routes = jsonResult['rota'];
@@ -165,7 +127,10 @@ class _homeScreenState extends State<homeScreen> {
                 double lng = stop['longitude'];
                 String name = stop['name'];
 
+                if(name == 'ponto')continue;
+
                 BitmapDescriptor? markerIcon = _customIcon;
+
                 markerIcon ??= BitmapDescriptor.defaultMarker;
 
                 markers.add(
@@ -192,6 +157,60 @@ class _homeScreenState extends State<homeScreen> {
     } catch (e) {
       print('Erro ao carregar paragens: $e');
     }
+  }
+
+  Future<void> _loadRoute() async {
+    if (widget.stops != null) {
+      Set<Polyline> polylines = await _routeService.getRouteBetweenStops(widget.stops!);
+
+      setState(() {
+        _polylines = polylines;
+      });
+    }
+
+  }
+
+  void _onClickWithButton() async {
+    User? user = _auth.currentUser;
+    if (user == null) {
+      Navigator.push(context, MaterialPageRoute(builder: (context) => const loginScreen()));
+    } else {
+      String? userEmail = user.email;
+      if (userEmail == 'admin@teste.com') {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => adminScreen()),
+        );
+      } else {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => profileScreen()),
+        );
+      }
+    }
+  }
+
+  void _onItemTapped(int index){
+    setState(() {
+      if (index == 0) {
+        _MarkersVisile = !_MarkersVisile;
+        if (_MarkersVisile) {
+          _loadStops();
+          showToast(message: "Paragens Ativada no Mapa");
+        } else {
+          markers.clear();
+          _polylines.clear();
+          showToast(message: "Paragens Desativadas no Mapa");
+        }
+      } else {
+        _selectButton = index;
+        if (index == 1) {
+          Navigator.push(context, MaterialPageRoute(builder: (context) => routeScreen()));
+        } else if (index == 2) {
+          Navigator.push(context, MaterialPageRoute(builder: (context) => busScreen()));
+        }
+      }
+    });
   }
 
   void _moveCamToLocation(){
@@ -235,6 +254,8 @@ class _homeScreenState extends State<homeScreen> {
         String name = stop['name'];
 
 
+        if(name == 'ponto') continue;
+
         BitmapDescriptor? markerIcon = _customIcon;
         markerIcon ??= BitmapDescriptor.defaultMarker;
 
@@ -256,6 +277,14 @@ class _homeScreenState extends State<homeScreen> {
     });
   }
 
+  void _onMapCreated(GoogleMapController controller) {
+    _mapController = controller;
+    _loadMapStyle();
+    _moveCamToLocation();
+    if(widget.stops != null){
+      _addStopsToMap(widget.stops!);
+    }
+  }
 
   @override
   void didChangeDependencies() {
@@ -296,6 +325,9 @@ class _homeScreenState extends State<homeScreen> {
     _loadMapStyle();
     _loadUserProfile();
     _loadCustomIcon();
+    if(widget.stops != null){
+      _loadRoute();
+    }
   }
 
   @override
@@ -307,26 +339,33 @@ class _homeScreenState extends State<homeScreen> {
         backgroundColor: Colors.transparent,
         elevation: 0,
         title: Container(
+          padding: EdgeInsets.symmetric(vertical: 10.0),
           decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(25.0),
+            color: Colors.white.withOpacity(0.7),
+            border: Border.all(color: Colors.white),
+            borderRadius: BorderRadius.circular(50.0),
           ),
-          child: TextField(
-            decoration: InputDecoration(
-              hintText: "Pesquise Aqui.",
-              border: InputBorder.none,
-              prefixIcon: const Icon(Icons.location_city, color: Colors.grey),
-              suffixIcon: GestureDetector(
-                onTap: _onClickWithButton,
-                child: CircleAvatar(
-                  radius: 10,
-                  backgroundImage: _imageURL != null
-                      ? NetworkImage(_imageURL!)
-                      : const NetworkImage("https://cdn-icons-png.flaticon.com/512/4646/4646084.png"),
+          child: Row(
+            children: [
+              Icon(Icons.location_city, color: Colors.indigo.shade900, size: 50,),
+              SizedBox(width: 10.0),
+              Expanded(
+                child: Text(
+                  "BUSLINE",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(color: Colors.indigo.shade900, fontWeight: FontWeight.bold),
                 ),
               ),
-              contentPadding: EdgeInsets.symmetric(vertical: 10.0),
-            ),
+              GestureDetector(
+                onTap: _onClickWithButton,
+                child: CircleAvatar(
+                  radius: 25,
+                  backgroundImage: _imageURL != null
+                      ? NetworkImage(_imageURL!)
+                      : NetworkImage("https://cdn-icons-png.flaticon.com/512/4646/4646084.png"),
+                ),
+              ),
+            ],
           ),
         ),
       ),
